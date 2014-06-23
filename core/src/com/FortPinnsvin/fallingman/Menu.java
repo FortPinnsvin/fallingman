@@ -11,6 +11,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Menu extends AndroidRun {
+	public  float W = Gdx.graphics.getWidth();
+	public  float H = Gdx.graphics.getHeight();
+	public  float x = (float)(W / 20);
+	public  float y = (float)(H / 1.3);
 	private SpriteBatch batch;
 	private Sprite spriteBg;
 	private Sprite[] spriteButton;
@@ -20,6 +24,8 @@ public class Menu extends AndroidRun {
 	private float buttonWidth;
 	private float buttonHeight;
 	private boolean flagButton;
+	private Sprite[] spriteCloude;
+	private Texture[] cloude;
 
 	@Override
 	public void create() {
@@ -32,20 +38,39 @@ public class Menu extends AndroidRun {
 		bg = new Texture("bg.png");
 		spriteBg = new Sprite(bg);
 		spriteBg.setPosition(0, 0);
-		spriteBg.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		spriteBg.setSize(W, H);
+		
+		
 
 		button = new Texture("button.png");
 		// Создаем 4 кнопки (присваивая им размеры и позицию в зависимости от
 		// размеров экрана)
 		spriteButton = new Sprite[4];
-		buttonWidth = (Gdx.graphics.getWidth() - 100);
-		buttonHeight = ((Gdx.graphics.getHeight() / 2) - 50) / 4;
+		buttonWidth = (W - 100);
+		buttonHeight = ((H / 2) - 50) / 4;
 		for (int i = 0; i < 4; i++) {
 			spriteButton[i] = new Sprite(button);
 			spriteButton[i].setPosition(50, buttonHeight * i + 10 * (i + 1));
 			spriteButton[i].setSize(buttonWidth, buttonHeight);
 		}
 
+		
+		
+		spriteCloude = new Sprite[3];
+		cloude = new Texture[3];
+		for (int i = 0; i < 3; i++) {
+			cloude[i] = new Texture("cloude" + (i + 1) + ".png");
+			spriteCloude[i] = new Sprite(cloude[i]);
+		}
+		spriteCloude[0].setPosition(x, y);
+		spriteCloude[0].setCenter(spriteCloude[0].getWidth()/2, spriteCloude[0].getHeight()/2);
+		spriteCloude[0].setSize((float)(W/2.2),H/7);
+		spriteCloude[1].setPosition((float)(W / 19), (float)(H / 1.7));
+		spriteCloude[1].setSize((float)(W/3), H/9);
+		spriteCloude[2].setPosition((float)(W / 2), (float)(H / 1.5));
+		spriteCloude[2].setSize((float)(W/2), H/12);
+
+		
 	}
 
 	@Override
@@ -61,6 +86,11 @@ public class Menu extends AndroidRun {
 
 		// Рисуем кнопки
 		batch.begin();
+		for (int i = 0; i < 3; i++) {
+			spriteCloude[i].draw(batch);
+		}
+		spriteCloude[0].setPosition(x, y);
+		
 		for (int i = 0; i < 4; i++) {
 			spriteButton[i].draw(batch);
 		}

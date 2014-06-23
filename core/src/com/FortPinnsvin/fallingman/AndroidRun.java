@@ -16,6 +16,7 @@ public class AndroidRun implements ApplicationListener {
 	public void create () {
 		menu = new Menu();
 		menu.create();
+		Gdx.input.setInputProcessor(new GameInputListener());
 	}
 
 	@Override
