@@ -4,9 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 
 public class GameInputListener implements InputProcessor {
-	
-	
-	
+
+	private LogicMenu logicMenu;
+
+	public GameInputListener() {
+		logicMenu = new LogicMenu();
+	}
+
 	@Override
 	public boolean keyDown(int keycode) {
 		// TODO Auto-generated method stub
@@ -28,7 +32,6 @@ public class GameInputListener implements InputProcessor {
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		// TODO Auto-generated method stub
-		
 		return false;
 	}
 
@@ -41,6 +44,7 @@ public class GameInputListener implements InputProcessor {
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
 		// TODO Auto-generated method stub
+		logicMenu.draggedCloude(screenX, screenY);
 		return false;
 	}
 
