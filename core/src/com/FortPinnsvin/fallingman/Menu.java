@@ -21,9 +21,7 @@ public class Menu extends AndroidRun {
 	public static float[] cloudeW;
 	public static float[] cloudeH;
 	private SpriteBatch batch;
-	private Sprite spriteBg;
 	private Sprite[] spriteButton;
-	private Texture bg;
 	private Texture button;
 	private BitmapFont font;
 	private float buttonWidth;
@@ -35,18 +33,13 @@ public class Menu extends AndroidRun {
 
 	@Override
 	public void create() {
-		
+
 		flagButton = false;
 		batch = new SpriteBatch();
 
 		font = new BitmapFont();
 
 		inputListener = new GameInputListener();
-
-		bg = new Texture("bg.png");
-		spriteBg = new Sprite(bg);
-		spriteBg.setPosition(0, 0);
-		spriteBg.setSize(W, H);
 
 		button = new Texture("button.png");
 		// Создаем 4 кнопки (присваивая им размеры и позицию в зависимости от
@@ -82,28 +75,21 @@ public class Menu extends AndroidRun {
 		cloudeH[1] = H / 9;
 		cloudeW[2] = (float) (W / 2);
 		cloudeH[2] = H / 12;
-		drawCloude();
+		setCloude();
 
 	}
 
 	@Override
 	public void render() {
 		// TODO Auto-generated method stub
-		Gdx.gl.glClearColor(1, 1, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-		// Рисуем наш background
-		batch.begin();
-		spriteBg.draw(batch);
-		batch.end();
 
 		// Рисуем кнопки
 		batch.begin();
 		for (int i = 0; i < 3; i++) {
 			spriteCloude[i].draw(batch);
 		}
-		//inputListener.initializeCloude(cloudeX, cloudeY, cloudeW, cloudeH);
-		drawCloude();
+		// inputListener.initializeCloude(cloudeX, cloudeY, cloudeW, cloudeH);
+		setCloude();
 
 		for (int i = 0; i < 4; i++) {
 			spriteButton[i].draw(batch);
@@ -117,7 +103,7 @@ public class Menu extends AndroidRun {
 			scrollButton();
 	}
 
-	private void drawCloude() {
+	private void setCloude() {
 		// TODO Auto-generated method stub
 		for (int i = 0; i < 3; i++) {
 			spriteCloude[i].setPosition(cloudeX[i], cloudeY[i]);
@@ -142,7 +128,7 @@ public class Menu extends AndroidRun {
 		if (spriteButton[0].getX() > Gdx.graphics.getWidth())
 			flagButton = false;
 	}
-	
+
 	public void initializeCloude(float[] x, float[] y, float[] w, float[] h) {
 		for (int i = 0; i < 3; i++) {
 			this.cloudeX[i] = x[i];
