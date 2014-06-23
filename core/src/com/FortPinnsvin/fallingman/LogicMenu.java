@@ -1,6 +1,7 @@
 package com.FortPinnsvin.fallingman;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class LogicMenu {
 	public float W = Gdx.graphics.getWidth();
@@ -39,20 +40,16 @@ public class LogicMenu {
 					&& screenX <= (buttonX[i] + buttonWidth)
 					&& Gdx.graphics.getHeight() - screenY > buttonY[i]
 					&& Gdx.graphics.getHeight() - screenY < (buttonY[i] + buttonHeight)) {
-				if (i == 3) AndroidRun.flagView = "Game";
-				if (i == 2) AndroidRun.flagView = "Menu";
-				if (i == 1) AndroidRun.flagView = "Menu";
-				if (i == 0) AndroidRun.flagView = "Menu";
+				if (i == 3)
+					AndroidRun.flagView = "Game";
+				if (i == 2)
+					AndroidRun.flagView = "Menu";
+				if (i == 1)
+					AndroidRun.flagView = "Menu";
+				if (i == 0)
+					AndroidRun.flagView = "Menu";
+				Menu.flagScrollButton = true;
 			}
-		}
-	}
-
-	public void initializeCloude(float[] x, float[] y, float[] w, float[] h) {
-		for (int i = 0; i < 3; i++) {
-			this.cloudeX[i] = x[i];
-			this.cloudeY[i] = y[i];
-			this.cloudeW[i] = w[i];
-			this.cloudeH[i] = h[i];
 		}
 	}
 
@@ -67,6 +64,28 @@ public class LogicMenu {
 						- Menu.cloudeH[i] / 2;
 			}
 		}
-		// menu.initializeCloude(cloudeX, cloudeY, cloudeW, cloudeH);
+	}
+
+	public void scrollButton() {
+		float[] pos = new float[4];
+
+		for (int i = 0; i < 4; i++) {
+			if (i % 2 == 0)
+				pos[i] = Menu.spriteButton[i].getX() + 20;
+			else
+				pos[i] = Menu.spriteButton[i].getX() - 20;
+		}
+		for (int i = 0; i < 4; i++) {
+			Menu.spriteButton[i].setPosition(pos[i], buttonHeight * i + 10
+					* (i + 1));
+		}
+		
+	}
+	
+	public boolean checkScrollButton(){
+		if (Menu.spriteButton[0].getX() > Gdx.graphics.getWidth())
+			return true;
+		else
+			return false;
 	}
 }

@@ -14,10 +14,12 @@ public class AndroidRun implements ApplicationListener {
 	public static String flagView;
 	private GameView game;
 	private Background background;
+	private TimerAnimation timerAimation;
 
 	@Override
 	public void create() {
 		flagView = "Menu";
+		timerAimation = new TimerAnimation();
 		//Create menu view
 		menu = new Menu();
 		menu.create();
@@ -34,9 +36,9 @@ public class AndroidRun implements ApplicationListener {
 	@Override
 	public void render() {
 		background.render();
-		if (flagView == "Menu")
+		if (flagView == "Menu" || !timerAimation.timer())
 			menu.render();
-		if (flagView == "Game")
+		if (flagView == "Game" && timerAimation.timer())
 			game.render();	
 	}
 

@@ -21,25 +21,28 @@ public class Menu extends AndroidRun {
 	public static float[] cloudeW;
 	public static float[] cloudeH;
 	private SpriteBatch batch;
-	private Sprite[] spriteButton;
+	public static Sprite[] spriteButton;
 	private Texture button;
+	public static boolean flagScrollButton;
 	private BitmapFont font;
 	private float buttonWidth;
 	private float buttonHeight;
-	private boolean flagButton;
 	private Sprite[] spriteCloude;
 	private Texture[] cloude;
 	private GameInputListener inputListener;
+	private LogicMenu logicMenu;
 
 	@Override
 	public void create() {
-
-		flagButton = false;
+		
+		flagScrollButton = false;
+		
 		batch = new SpriteBatch();
 
 		font = new BitmapFont();
 
 		inputListener = new GameInputListener();
+		logicMenu = new LogicMenu();
 
 		button = new Texture("button.png");
 		// Создаем 4 кнопки (присваивая им размеры и позицию в зависимости от
@@ -95,12 +98,8 @@ public class Menu extends AndroidRun {
 			spriteButton[i].draw(batch);
 		}
 		batch.end();
-
-		if (Gdx.input.isTouched()) {
-			flagButton = true;
-		}
-		if (flagButton)
-			scrollButton();
+		if (flagScrollButton) logicMenu.scrollButton();
+		
 	}
 
 	private void setCloude() {
@@ -110,32 +109,6 @@ public class Menu extends AndroidRun {
 			spriteCloude[i].setSize(cloudeW[i], cloudeH[i]);
 		}
 
-	}
-
-	public void scrollButton() {
-		float[] pos = new float[4];
-
-		for (int i = 0; i < 4; i++) {
-			if (i % 2 == 0)
-				pos[i] = spriteButton[i].getX() + 20;
-			else
-				pos[i] = spriteButton[i].getX() - 20;
-		}
-		for (int i = 0; i < 4; i++) {
-			spriteButton[i]
-					.setPosition(pos[i], buttonHeight * i + 10 * (i + 1));
-		}
-		if (spriteButton[0].getX() > Gdx.graphics.getWidth())
-			flagButton = false;
-	}
-
-	public void initializeCloude(float[] x, float[] y, float[] w, float[] h) {
-		for (int i = 0; i < 3; i++) {
-			this.cloudeX[i] = x[i];
-			this.cloudeY[i] = y[i];
-			this.cloudeW[i] = w[i];
-			this.cloudeH[i] = h[i];
-		}
 	}
 
 }
