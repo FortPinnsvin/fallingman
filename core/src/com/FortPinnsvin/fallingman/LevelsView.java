@@ -2,6 +2,8 @@ package com.FortPinnsvin.fallingman;
 
 import java.util.Random;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
@@ -12,7 +14,7 @@ public class LevelsView {
 	public float			W		= Gdx.graphics.getWidth();
 	public float			H		= Gdx.graphics.getHeight();
 	private SpriteBatch		batch;
-	private BitmapFont		font;
+	private BitmapFont		font, fontTitle;
 	private float			buttonWidth;
 	private float			buttonHeight;
 	private Sprite[][]		buttons;
@@ -29,8 +31,10 @@ public class LevelsView {
 	private float			timer	= 0.0f;
 
 	public void create() {
+		AssetManager manager = new AssetManager();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
+		fontTitle = new BitmapFont( /* Gdx.files.internal("data/8bit_font.fnt"), Gdx.files.internal("data/8bit_font.png"), false */);
 		buttonTexture = new Texture("button.png");
 		buttonWidth = buttonHeight = (Math.min(W, H) / 5) * 0.8f;
 		buttons = new Sprite[5][5];
@@ -40,6 +44,8 @@ public class LevelsView {
 		float tile = Math.min(W, H) / 5;
 		float microDelta = (tile - buttonHeight) / 2;
 		font.setScale(scale * 0.6f);
+		fontTitle.setScale((delta / fontTitle.getLineHeight()) / 4f);
+		fontTitle.setColor(Color.BLUE);
 		for (int i = 0; i < 5; i++)
 			for (int j = 0; j < 5; j++) {
 				buttons[i][j] = new Sprite(buttonTexture);
@@ -102,10 +108,11 @@ public class LevelsView {
 	}
 
 	private void drawTitle() {
-		TextBounds bounds = font.getBounds("Select level:");
+		float delta = Math.abs(W - H) / 4;
+		TextBounds bounds = fontTitle.getBounds("Select level:");
 		float dX = bounds.width / 2;
-		float dY = bounds.height;
-		font.draw(batch, "Select level:", W / 2 - dX, H - dY * 1.3f);
+		float dY = bounds.height / 2;
+		fontTitle.draw(batch, "Select level:", W / 2 - dX, H - delta - dY);
 	}
 
 	public void balloonRun() {

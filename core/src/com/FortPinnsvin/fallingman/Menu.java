@@ -19,7 +19,7 @@ public class Menu extends AndroidRun {
 	private Texture				button;
 	private Texture				balloon;
 	public static Sprite		spriteBalloon;
-	public static int		    flagScrollButton;
+	public static int			flagScrollButton;
 	private BitmapFont			font;
 	private float				buttonWidth;
 	private float				buttonHeight;
@@ -28,6 +28,7 @@ public class Menu extends AndroidRun {
 	private GameInputListener	inputListener;
 	private LogicMenu			logicMenu;
 	private final String[]		BTN_LABELS	= {"Play", "Levels", "Scores", "About"};
+	private float				timer		= 0.0f;
 
 	@Override
 	public void create() {
@@ -83,9 +84,12 @@ public class Menu extends AndroidRun {
 		logicMenu.balloonRun();
 		spriteBalloon.draw(batch);
 		for (int i = 0; i < 3; i++) {
+			float delta = (float) (Math.sin(timer * (i + 1)) * (W / 10.0f));
+			spriteCloude[i].setX(spriteCloude[i].getX() + delta);
 			spriteCloude[i].draw(batch);
+			spriteCloude[i].setX(spriteCloude[i].getX() - delta);
 		}
-		//setCloude();
+		// setCloude();
 		for (int i = 0; i < 4; i++) {
 			spriteButton[i].draw(batch);
 			float x = spriteButton[i].getX();
@@ -96,6 +100,7 @@ public class Menu extends AndroidRun {
 			font.draw(batch, BTN_LABELS[BTN_LABELS.length - i - 1], x + dX, y - dY);
 		}
 		batch.end();
+		timer = timer + 0.05f;
 		if (flagScrollButton == 1) logicMenu.scrollButton();
 		if (flagScrollButton == -1) logicMenu.showButton();
 	}
