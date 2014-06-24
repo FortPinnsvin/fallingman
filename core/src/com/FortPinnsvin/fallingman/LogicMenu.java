@@ -4,13 +4,13 @@ import java.util.Random;
 import com.badlogic.gdx.Gdx;
 
 public class LogicMenu {
-	public float		W	= Gdx.graphics.getWidth();
-	public float		H	= Gdx.graphics.getHeight();
-	private float		buttonWidth;
-	private float		buttonHeight;
-	private float[]		buttonX;
-	private float[]		buttonY;
-	private Random		rand;
+	public float	W	= Gdx.graphics.getWidth();
+	public float	H	= Gdx.graphics.getHeight();
+	private float	buttonWidth;
+	private float	buttonHeight;
+	private float[]	buttonX;
+	private float[]	buttonY;
+	private Random	rand;
 
 	public LogicMenu() {
 		buttonWidth = (W - 100);

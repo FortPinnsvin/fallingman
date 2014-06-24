@@ -95,7 +95,7 @@ public class LevelsView {
 				buttons[i][j].draw(batch);
 				float x = buttons[i][j].getX();
 				float y = buttons[i][j].getY() + buttons[i][j].getHeight();
-				int counter = (5 - i) * 6 + j + 1;
+				int counter = (5 - i) * 4 + j + 1;
 				TextBounds bounds = font.getBounds("" + counter);
 				float dX = (buttons[i][j].getWidth() - bounds.width) / 2;
 				float dY = (buttons[i][j].getHeight() - bounds.height) / 2;
