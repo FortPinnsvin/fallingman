@@ -100,7 +100,7 @@ public class Menu extends AndroidRun {
 			font.draw(batch, BTN_LABELS[BTN_LABELS.length - i - 1], x + dX, y - dY);
 		}
 		batch.end();
-		timer = timer + 0.05f;
+		timer = timer + 0.03f;
 		if (flagScrollButton == 1) logicMenu.scrollButton();
 		if (flagScrollButton == -1) logicMenu.showButton();
 	}

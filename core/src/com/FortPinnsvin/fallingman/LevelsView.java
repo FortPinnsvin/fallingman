@@ -2,7 +2,6 @@ package com.FortPinnsvin.fallingman;
 
 import java.util.Random;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -11,8 +10,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class LevelsView {
-	public float			W		= Gdx.graphics.getWidth();
-	public float			H		= Gdx.graphics.getHeight();
+	public final float		W		= Gdx.graphics.getWidth();
+	public final float		H		= Gdx.graphics.getHeight();
 	private SpriteBatch		batch;
 	private BitmapFont		font, fontTitle;
 	private float			buttonWidth;
@@ -104,7 +103,7 @@ public class LevelsView {
 			}
 		drawTitle();
 		batch.end();
-		timer = timer + 0.05f;
+		timer = timer + 0.03f;
 	}
 
 	private void drawTitle() {
