@@ -20,6 +20,13 @@ public class LevelsView {
 	private Texture			balloon;
 	public static Sprite	spriteBalloon;
 	private Random			rand	= new Random();
+	public static float[]	cloudeX;
+	public static float[]	cloudeY;
+	public static float[]	cloudeW;
+	public static float[]	cloudeH;
+	private Sprite[]		spriteCloude;
+	private Texture[]		cloude;
+	private float			timer	= 0.0f;
 
 	public void create() {
 		batch = new SpriteBatch();
@@ -43,12 +50,41 @@ public class LevelsView {
 		spriteBalloon = new Sprite(balloon);
 		spriteBalloon.setSize(W / 3, H / 4);
 		spriteBalloon.setPosition(W / 2, -H / 4);
+		spriteCloude = new Sprite[3];
+		cloude = new Texture[3];
+		for (int i = 0; i < 3; i++) {
+			cloude[i] = new Texture("cloude" + (i + 1) + ".png");
+			spriteCloude[i] = new Sprite(cloude[i]);
+		}
+		cloudeX = new float[3];
+		cloudeY = new float[3];
+		cloudeW = new float[3];
+		cloudeH = new float[3];
+		cloudeX[0] = (float) (W / 20);
+		cloudeY[0] = (float) (H / 1.3);
+		cloudeX[1] = (float) (W / 19);
+		cloudeY[1] = (float) (H / 1.7);
+		cloudeX[2] = (float) (W / 2);
+		cloudeY[2] = (float) (H / 1.5);
+		cloudeW[0] = (float) (W / 2.2);
+		cloudeH[0] = H / 7;
+		cloudeW[1] = (float) (W / 3);
+		cloudeH[1] = H / 9;
+		cloudeW[2] = (float) (W / 2);
+		cloudeH[2] = H / 12;
+		setCloude();
 	}
 
 	public void render() {
 		batch.begin();
 		spriteBalloon.draw(batch);
 		balloonRun();
+		for (int i = 0; i < 3; i++) {
+			float delta = (float) (Math.sin(timer * (i + 1)) * (W / 10.0f));
+			spriteCloude[i].setX(spriteCloude[i].getX() + delta);
+			spriteCloude[i].draw(batch);
+			spriteCloude[i].setX(spriteCloude[i].getX() - delta);
+		}
 		for (int i = 0; i < 5; i++)
 			for (int j = 0; j < 5; j++) {
 				buttons[i][j].draw(batch);
@@ -60,11 +96,27 @@ public class LevelsView {
 				float dY = (buttons[i][j].getHeight() - bounds.height) / 2;
 				font.draw(batch, "" + counter, x + dX, y - dY);
 			}
+		drawTitle();
 		batch.end();
+		timer = timer + 0.05f;
+	}
+
+	private void drawTitle() {
+		TextBounds bounds = font.getBounds("Select level:");
+		float dX = bounds.width / 2;
+		float dY = bounds.height;
+		font.draw(batch, "Select level:", W / 2 - dX, H - dY * 1.3f);
 	}
 
 	public void balloonRun() {
 		spriteBalloon.setPosition(spriteBalloon.getX() + (rand.nextInt(2) - 1), spriteBalloon.getY() + 2);
 		if (spriteBalloon.getY() > H) spriteBalloon.setPosition(W / 2, -H / 4);
+	}
+
+	private void setCloude() {
+		for (int i = 0; i < 3; i++) {
+			spriteCloude[i].setPosition(cloudeX[i], cloudeY[i]);
+			spriteCloude[i].setSize(cloudeW[i], cloudeH[i]);
+		}
 	}
 }
