@@ -1,68 +1,46 @@
 package com.FortPinnsvin.fallingman;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class AndroidRun implements ApplicationListener {
-	private Menu menu;
-	public static String flagView;
-	private GameView game;
-	private Background background;
-	private TimerAnimation timerAimation;
+	private Menu			menu;
+	public static String	flagView;
+	private GameView		game;
+	private Background		background;
+	private TimerAnimation	timerAimation;
 
 	@Override
 	public void create() {
 		flagView = "Menu";
 		timerAimation = new TimerAnimation();
-		//Create menu view
+		// Create menu view
 		menu = new Menu();
 		menu.create();
-		//Create game view
+		// Create game view
 		game = new GameView();
 		game.create();
-		
 		background = new Background();
 		background.create();
-		
 		Gdx.input.setInputProcessor(new GameInputListener());
 	}
 
 	@Override
 	public void render() {
 		background.render();
-		if (flagView == "Menu" || !timerAimation.timer())
-			menu.render();
-		if (flagView == "Game" && timerAimation.timer())
-			game.render();	
+		if (flagView == "Menu" || !timerAimation.timer()) menu.render();
+		if (flagView == "Game" && timerAimation.timer()) game.render();
 	}
 
 	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-
-	}
+	public void resize(int width, int height) {}
 
 	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-
-	}
+	public void pause() {}
 
 	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-
-	}
+	public void resume() {}
 
 	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-
-	}
+	public void dispose() {}
 }

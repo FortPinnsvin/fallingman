@@ -3,8 +3,7 @@ package com.FortPinnsvin.fallingman;
 import com.badlogic.gdx.InputProcessor;
 
 public class GameInputListener implements InputProcessor {
-
-	private LogicMenu logicMenu;
+	private LogicMenu	logicMenu;
 
 	public GameInputListener() {
 		logicMenu = new LogicMenu();
@@ -12,53 +11,43 @@ public class GameInputListener implements InputProcessor {
 
 	@Override
 	public boolean keyDown(int keycode) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean keyUp(int keycode) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean keyTyped(char character) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
-		if (AndroidRun.flagView.equals("Menu"))
-			logicMenu.buttonClick(screenX, screenY);
+		if (AndroidRun.flagView.equals("Menu")) logicMenu.buttonClick(screenX, screenY);
 		return false;
 	}
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		// TODO Auto-generated method stub
 		logicMenu.draggedCloude(screenX, screenY);
 		return false;
 	}
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean scrolled(int amount) {
-		// TODO Auto-generated method stub
 		return false;
 	}
-
 }
