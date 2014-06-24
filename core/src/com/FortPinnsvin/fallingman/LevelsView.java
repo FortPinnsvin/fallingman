@@ -1,5 +1,6 @@
 package com.FortPinnsvin.fallingman;
 
+import java.util.Random;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -8,14 +9,17 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class LevelsView {
-	public float		W	= Gdx.graphics.getWidth();
-	public float		H	= Gdx.graphics.getHeight();
-	private SpriteBatch	batch;
-	private BitmapFont	font;
-	private float		buttonWidth;
-	private float		buttonHeight;
-	private Sprite[][]	buttons;
-	private Texture		buttonTexture;
+	public float			W		= Gdx.graphics.getWidth();
+	public float			H		= Gdx.graphics.getHeight();
+	private SpriteBatch		batch;
+	private BitmapFont		font;
+	private float			buttonWidth;
+	private float			buttonHeight;
+	private Sprite[][]		buttons;
+	private Texture			buttonTexture;
+	private Texture			balloon;
+	public static Sprite	spriteBalloon;
+	private Random			rand	= new Random();
 
 	public void create() {
 		batch = new SpriteBatch();
@@ -35,10 +39,16 @@ public class LevelsView {
 				buttons[i][j].setPosition(tile * j + microDelta, delta + tile * i + microDelta);
 				buttons[i][j].setSize(buttonWidth, buttonHeight);
 			}
+		balloon = new Texture("balloon.png");
+		spriteBalloon = new Sprite(balloon);
+		spriteBalloon.setSize(W / 3, H / 4);
+		spriteBalloon.setPosition(W / 2, -H / 4);
 	}
 
 	public void render() {
 		batch.begin();
+		spriteBalloon.draw(batch);
+		balloonRun();
 		for (int i = 0; i < 5; i++)
 			for (int j = 0; j < 5; j++) {
 				buttons[i][j].draw(batch);
@@ -51,5 +61,10 @@ public class LevelsView {
 				font.draw(batch, "" + counter, x + dX, y - dY);
 			}
 		batch.end();
+	}
+
+	public void balloonRun() {
+		spriteBalloon.setPosition(spriteBalloon.getX() + (rand.nextInt(2) - 1), spriteBalloon.getY() + 2);
+		if (spriteBalloon.getY() > H) spriteBalloon.setPosition(W / 2, -H / 4);
 	}
 }
