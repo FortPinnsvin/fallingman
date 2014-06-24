@@ -88,4 +88,8 @@ public class LogicMenu {
 		else
 			return false;
 	}
+	
+	public void balloonRun(){
+		Menu.spriteBalloon.setPosition(100,Menu.spriteBalloon.getY()+2);
+	}
 }

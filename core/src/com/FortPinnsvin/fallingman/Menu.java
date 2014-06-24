@@ -23,6 +23,8 @@ public class Menu extends AndroidRun {
 	private SpriteBatch batch;
 	public static Sprite[] spriteButton;
 	private Texture button;
+	private Texture balloon;
+	public static Sprite spriteBalloon;
 	public static boolean flagScrollButton;
 	private BitmapFont font;
 	private float buttonWidth;
@@ -43,7 +45,12 @@ public class Menu extends AndroidRun {
 
 		inputListener = new GameInputListener();
 		logicMenu = new LogicMenu();
-
+		
+		balloon = new Texture("balloon.png");
+		spriteBalloon = new Sprite(balloon);
+		spriteBalloon.setPosition(100, -100);
+		spriteBalloon.setSize(100, 100);
+		
 		button = new Texture("button.png");
 		// Создаем 4 кнопки (присваивая им размеры и позицию в зависимости от
 		// размеров экрана)
@@ -85,9 +92,12 @@ public class Menu extends AndroidRun {
 	@Override
 	public void render() {
 		// TODO Auto-generated method stub
-
 		// Рисуем кнопки
 		batch.begin();
+		
+		logicMenu.balloonRun();
+		spriteBalloon.draw(batch);
+		
 		for (int i = 0; i < 3; i++) {
 			spriteCloude[i].draw(batch);
 		}
@@ -97,6 +107,7 @@ public class Menu extends AndroidRun {
 		for (int i = 0; i < 4; i++) {
 			spriteButton[i].draw(batch);
 		}
+		
 		batch.end();
 		if (flagScrollButton) logicMenu.scrollButton();
 		
