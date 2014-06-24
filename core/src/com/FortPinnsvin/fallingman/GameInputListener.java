@@ -42,7 +42,7 @@ public class GameInputListener implements InputProcessor {
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		logicMenu.draggedCloude(screenX, screenY);
+		//logicMenu.draggedCloude(screenX, screenY);
 		return false;
 	}
 

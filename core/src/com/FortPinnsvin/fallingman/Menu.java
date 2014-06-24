@@ -85,7 +85,7 @@ public class Menu extends AndroidRun {
 		for (int i = 0; i < 3; i++) {
 			spriteCloude[i].draw(batch);
 		}
-		setCloude();
+		//setCloude();
 		for (int i = 0; i < 4; i++) {
 			spriteButton[i].draw(batch);
 			float x = spriteButton[i].getX();
