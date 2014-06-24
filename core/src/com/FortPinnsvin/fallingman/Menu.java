@@ -19,7 +19,7 @@ public class Menu extends AndroidRun {
 	private Texture				button;
 	private Texture				balloon;
 	public static Sprite		spriteBalloon;
-	public static boolean		flagScrollButton;
+	public static int		    flagScrollButton;
 	private BitmapFont			font;
 	private float				buttonWidth;
 	private float				buttonHeight;
@@ -31,7 +31,7 @@ public class Menu extends AndroidRun {
 
 	@Override
 	public void create() {
-		flagScrollButton = false;
+		flagScrollButton = 0;
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		inputListener = new GameInputListener();
@@ -96,7 +96,8 @@ public class Menu extends AndroidRun {
 			font.draw(batch, BTN_LABELS[BTN_LABELS.length - i - 1], x + dX, y - dY);
 		}
 		batch.end();
-		if (flagScrollButton) logicMenu.scrollButton();
+		if (flagScrollButton == 1) logicMenu.scrollButton();
+		if (flagScrollButton == -1) logicMenu.showButton();
 	}
 
 	private void setCloude() {
