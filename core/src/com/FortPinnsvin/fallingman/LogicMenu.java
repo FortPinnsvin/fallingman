@@ -1,7 +1,6 @@
 package com.FortPinnsvin.fallingman;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class LogicMenu {
 	public float W = Gdx.graphics.getWidth();
@@ -79,17 +78,17 @@ public class LogicMenu {
 			Menu.spriteButton[i].setPosition(pos[i], buttonHeight * i + 10
 					* (i + 1));
 		}
-		
+
 	}
-	
-	public boolean checkScrollButton(){
+
+	public boolean checkScrollButton() {
 		if (Menu.spriteButton[0].getX() > Gdx.graphics.getWidth())
 			return true;
 		else
 			return false;
 	}
-	
-	public void balloonRun(){
-		Menu.spriteBalloon.setPosition(100,Menu.spriteBalloon.getY()+2);
+
+	public void balloonRun() {
+		Menu.spriteBalloon.setPosition(100, Menu.spriteBalloon.getY() + 2);
 	}
 }

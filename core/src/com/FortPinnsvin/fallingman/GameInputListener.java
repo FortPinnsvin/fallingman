@@ -1,6 +1,5 @@
 package com.FortPinnsvin.fallingman;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 
 public class GameInputListener implements InputProcessor {
@@ -38,7 +37,8 @@ public class GameInputListener implements InputProcessor {
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		// TODO Auto-generated method stub
-		logicMenu.buttonClick(screenX, screenY);
+		if (AndroidRun.flagView.equals("Menu"))
+			logicMenu.buttonClick(screenX, screenY);
 		return false;
 	}
 

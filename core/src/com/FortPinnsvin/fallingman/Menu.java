@@ -1,17 +1,10 @@
 package com.FortPinnsvin.fallingman;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 public class Menu extends AndroidRun {
 	public float W = Gdx.graphics.getWidth();
@@ -36,24 +29,24 @@ public class Menu extends AndroidRun {
 
 	@Override
 	public void create() {
-		
+
 		flagScrollButton = false;
-		
+
 		batch = new SpriteBatch();
 
 		font = new BitmapFont();
 
 		inputListener = new GameInputListener();
 		logicMenu = new LogicMenu();
-		
+
 		balloon = new Texture("balloon.png");
 		spriteBalloon = new Sprite(balloon);
 		spriteBalloon.setPosition(100, -100);
 		spriteBalloon.setSize(100, 100);
-		
+
 		button = new Texture("button.png");
-		// Создаем 4 кнопки (присваивая им размеры и позицию в зависимости от
-		// размеров экрана)
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 4 пїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		spriteButton = new Sprite[4];
 		buttonWidth = (W - 100);
 		buttonHeight = ((H / 2) - 50) / 4;
@@ -92,12 +85,12 @@ public class Menu extends AndroidRun {
 	@Override
 	public void render() {
 		// TODO Auto-generated method stub
-		// Рисуем кнопки
+		// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		batch.begin();
-		
+
 		logicMenu.balloonRun();
 		spriteBalloon.draw(batch);
-		
+
 		for (int i = 0; i < 3; i++) {
 			spriteCloude[i].draw(batch);
 		}
@@ -107,10 +100,11 @@ public class Menu extends AndroidRun {
 		for (int i = 0; i < 4; i++) {
 			spriteButton[i].draw(batch);
 		}
-		
+
 		batch.end();
-		if (flagScrollButton) logicMenu.scrollButton();
-		
+		if (flagScrollButton)
+			logicMenu.scrollButton();
+
 	}
 
 	private void setCloude() {
