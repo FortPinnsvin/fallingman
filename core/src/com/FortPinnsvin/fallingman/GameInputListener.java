@@ -18,7 +18,7 @@ public class GameInputListener implements InputProcessor {
 	@Override
 	public boolean keyUp(int keycode) {
 		if (keycode == Keys.BACK) {
-			if (AndroidRun.flagView.equals("Levels")) AndroidRun.flagView = "Menu";
+			if (AndroidRun.flagView.equals("Levels")) {AndroidRun.flagView = "Menu"; Menu.flagScrollButton = -1;}
 			else if (AndroidRun.flagView.equals("Menu")) System.exit(0);
 		}
 		return false;
