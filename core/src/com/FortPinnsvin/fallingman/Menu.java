@@ -38,9 +38,8 @@ public class Menu extends AndroidRun {
 		logicMenu = new LogicMenu();
 		balloon = new Texture("balloon.png");
 		spriteBalloon = new Sprite(balloon);
-		spriteBalloon.setSize(W/3, H/4);
-		spriteBalloon.setPosition(W/2, -H/4);
-	
+		spriteBalloon.setSize(W / 3, H / 4);
+		spriteBalloon.setPosition(W / 2, -H / 4);
 		button = new Texture("button.png");
 		spriteButton = new Sprite[4];
 		buttonWidth = (W - 100);

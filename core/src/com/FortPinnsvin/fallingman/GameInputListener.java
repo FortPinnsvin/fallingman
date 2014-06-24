@@ -1,5 +1,6 @@
 package com.FortPinnsvin.fallingman;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 
 public class GameInputListener implements InputProcessor {
@@ -16,6 +17,10 @@ public class GameInputListener implements InputProcessor {
 
 	@Override
 	public boolean keyUp(int keycode) {
+		if (keycode == Keys.BACK) {
+			if (AndroidRun.flagView.equals("Levels")) AndroidRun.flagView = "Menu";
+			else if (AndroidRun.flagView.equals("Menu")) System.exit(0);
+		}
 		return false;
 	}
 

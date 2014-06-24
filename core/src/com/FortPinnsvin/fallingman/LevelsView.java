@@ -3,9 +3,9 @@ package com.FortPinnsvin.fallingman;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 
 public class LevelsView {
 	public float		W	= Gdx.graphics.getWidth();
@@ -44,7 +44,7 @@ public class LevelsView {
 				buttons[i][j].draw(batch);
 				float x = buttons[i][j].getX();
 				float y = buttons[i][j].getY() + buttons[i][j].getHeight();
-				int counter = j * 5 + i + 1;
+				int counter = (4 - i) * 5 + j + 1;
 				TextBounds bounds = font.getBounds("" + counter);
 				float dX = (buttons[i][j].getWidth() - bounds.width) / 2;
 				float dY = (buttons[i][j].getHeight() - bounds.height) / 2;

@@ -9,12 +9,12 @@ public class AndroidRun implements ApplicationListener {
 	private GameView		game;
 	private LevelsView		levels;
 	private Background		background;
-	private TimerAnimation	timerAimation;
+	private TimerAnimation	timerAnimation;
 
 	@Override
 	public void create() {
 		flagView = "Menu";
-		timerAimation = new TimerAnimation();
+		timerAnimation = new TimerAnimation();
 		// MenuView
 		menu = new Menu();
 		menu.create();
@@ -28,14 +28,15 @@ public class AndroidRun implements ApplicationListener {
 		levels = new LevelsView();
 		levels.create();
 		Gdx.input.setInputProcessor(new GameInputListener());
+		Gdx.input.setCatchBackKey(true);
 	}
 
 	@Override
 	public void render() {
 		background.render();
-		if (flagView == "Menu" || !timerAimation.timer()) menu.render();
-		if (flagView == "Game" && timerAimation.timer()) game.render();
-		if (flagView == "Levels" && timerAimation.timer()) levels.render();
+		if (flagView == "Menu" || !timerAnimation.timer()) menu.render();
+		if (flagView == "Game" && timerAnimation.timer()) game.render();
+		if (flagView == "Levels" && timerAnimation.timer()) levels.render();
 	}
 
 	@Override

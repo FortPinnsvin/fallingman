@@ -1,7 +1,6 @@
 package com.FortPinnsvin.fallingman;
 
 import java.util.Random;
-
 import com.badlogic.gdx.Gdx;
 
 public class LogicMenu {
@@ -16,7 +15,7 @@ public class LogicMenu {
 	private float		buttonHeight;
 	private float[]		buttonX;
 	private float[]		buttonY;
-	private Random rand;
+	private Random		rand;
 
 	public LogicMenu() {
 		cloudeX = new float[3];
@@ -28,7 +27,6 @@ public class LogicMenu {
 		buttonX = new float[4];
 		buttonY = new float[4];
 		rand = new Random();
-
 		for (int i = 0; i < 4; i++) {
 			buttonX[i] = 50;
 			buttonY[i] = buttonHeight * i + 10 * (i + 1);
@@ -76,6 +74,6 @@ public class LogicMenu {
 	}
 
 	public void balloonRun() {
-		Menu.spriteBalloon.setPosition(Menu.spriteBalloon.getX()+(rand.nextInt(2)-1), Menu.spriteBalloon.getY() + 2);
+		Menu.spriteBalloon.setPosition(Menu.spriteBalloon.getX() + (rand.nextInt(2) - 1), Menu.spriteBalloon.getY() + 2);
 	}
 }
