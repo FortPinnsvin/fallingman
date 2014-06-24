@@ -35,18 +35,19 @@ public class LevelsView {
 		font = new BitmapFont(Gdx.files.internal("data/8bit.fnt"), Gdx.files.internal("data/8bit.png"), false);
 		fontTitle = new BitmapFont(Gdx.files.internal("data/8bit.fnt"), Gdx.files.internal("data/8bit.png"), false);
 		buttonTexture = new Texture("button.png");
-		buttonWidth = buttonHeight = (Math.min(W, H) / 5) * 0.8f;
-		buttons = new Sprite[5][5];
+		buttonWidth = buttonHeight = (Math.min(W, H) / 4) * 0.8f;
+		buttons = new Sprite[6][4];
 		float fontHeight = font.getLineHeight();
 		float scale = (buttonHeight / fontHeight);
-		float delta = Math.abs(W - H) / 2;
-		float tile = Math.min(W, H) / 5;
+		float delta = buttonHeight * 0.25f;
+		float tile = Math.min(W, H) / 4;
 		float microDelta = (tile - buttonHeight) / 2;
+		float space = H - (delta + tile * 5 + microDelta);
 		font.setScale(scale * 0.4f);
-		fontTitle.setScale((delta / fontTitle.getLineHeight()) / 5f);
+		fontTitle.setScale((space / fontTitle.getLineHeight()) / 6f);
 		fontTitle.setColor(Color.BLUE);
-		for (int i = 0; i < 5; i++)
-			for (int j = 0; j < 5; j++) {
+		for (int i = 0; i < 6; i++)
+			for (int j = 0; j < 4; j++) {
 				buttons[i][j] = new Sprite(buttonTexture);
 				buttons[i][j].setPosition(tile * j + microDelta, delta + tile * i + microDelta);
 				buttons[i][j].setSize(buttonWidth, buttonHeight);
@@ -90,12 +91,12 @@ public class LevelsView {
 			spriteCloude[i].draw(batch);
 			spriteCloude[i].setX(spriteCloude[i].getX() - delta);
 		}
-		for (int i = 0; i < 5; i++)
-			for (int j = 0; j < 5; j++) {
+		for (int i = 0; i < 6; i++)
+			for (int j = 0; j < 4; j++) {
 				buttons[i][j].draw(batch);
 				float x = buttons[i][j].getX();
 				float y = buttons[i][j].getY() + buttons[i][j].getHeight();
-				int counter = (4 - i) * 5 + j + 1;
+				int counter = (5 - i) * 6 + j + 1;
 				TextBounds bounds = font.getBounds("" + counter);
 				float dX = (buttons[i][j].getWidth() - bounds.width) / 2;
 				float dY = (buttons[i][j].getHeight() - bounds.height) / 2;
@@ -107,11 +108,14 @@ public class LevelsView {
 	}
 
 	private void drawTitle() {
-		float delta = Math.abs(W - H) / 4;
+		float delta = buttonHeight * 0.25f;
+		float tile = Math.min(W, H) / 4;
+		float microDelta = (tile - buttonHeight) / 2;
+		float space = H - (delta + tile * 6 + microDelta);
 		TextBounds bounds = fontTitle.getBounds("Select level:");
 		float dX = bounds.width / 2;
 		float dY = bounds.height / 2;
-		fontTitle.draw(batch, "Select level:", W / 2 - dX, H - delta - dY);
+		fontTitle.draw(batch, "Select level:", W / 2 - dX, H - space / 2 - dY);
 	}
 
 	public void balloonRun() {
