@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Background {
 
-	public float W = Gdx.graphics.getWidth();
-	public float H = Gdx.graphics.getHeight();
+	public final float WIDTH = Gdx.graphics.getWidth();
+	public final float HEIGHT = Gdx.graphics.getHeight();
 	private Texture bg;
 	private Sprite spriteBg;
 	private SpriteBatch batch;
@@ -20,7 +20,7 @@ public class Background {
 		bg = new Texture("bg.png");
 		spriteBg = new Sprite(bg);
 		spriteBg.setPosition(0, 0);
-		spriteBg.setSize(W, H);
+		spriteBg.setSize(WIDTH, HEIGHT);
 
 	}
 
