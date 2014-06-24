@@ -31,10 +31,9 @@ public class LevelsView {
 	private float			timer	= 0.0f;
 
 	public void create() {
-		AssetManager manager = new AssetManager();
 		batch = new SpriteBatch();
-		font = new BitmapFont();
-		fontTitle = new BitmapFont( /* Gdx.files.internal("data/8bit_font.fnt"), Gdx.files.internal("data/8bit_font.png"), false */);
+		font = new BitmapFont(Gdx.files.internal("data/8bit.fnt"), Gdx.files.internal("data/8bit.png"), false);
+		fontTitle = new BitmapFont(Gdx.files.internal("data/8bit.fnt"), Gdx.files.internal("data/8bit.png"), false);
 		buttonTexture = new Texture("button.png");
 		buttonWidth = buttonHeight = (Math.min(W, H) / 5) * 0.8f;
 		buttons = new Sprite[5][5];
@@ -43,8 +42,8 @@ public class LevelsView {
 		float delta = Math.abs(W - H) / 2;
 		float tile = Math.min(W, H) / 5;
 		float microDelta = (tile - buttonHeight) / 2;
-		font.setScale(scale * 0.6f);
-		fontTitle.setScale((delta / fontTitle.getLineHeight()) / 4f);
+		font.setScale(scale * 0.4f);
+		fontTitle.setScale((delta / fontTitle.getLineHeight()) / 5f);
 		fontTitle.setColor(Color.BLUE);
 		for (int i = 0; i < 5; i++)
 			for (int j = 0; j < 5; j++) {

@@ -34,7 +34,7 @@ public class Menu extends AndroidRun {
 	public void create() {
 		flagScrollButton = 0;
 		batch = new SpriteBatch();
-		font = new BitmapFont();
+		font = new BitmapFont(Gdx.files.internal("data/8bit.fnt"), Gdx.files.internal("data/8bit.png"), false);
 		inputListener = new GameInputListener();
 		logicMenu = new LogicMenu();
 		balloon = new Texture("balloon.png");
@@ -46,7 +46,7 @@ public class Menu extends AndroidRun {
 		buttonWidth = (W - 100);
 		buttonHeight = ((H / 2) - 50) / 4;
 		float fontHeight = font.getLineHeight();
-		float scale = (buttonHeight / fontHeight);
+		float scale = (buttonHeight / fontHeight * 0.8f);
 		font.setScale(scale * 0.6f);
 		for (int i = 0; i < 4; i++) {
 			spriteButton[i] = new Sprite(button);
