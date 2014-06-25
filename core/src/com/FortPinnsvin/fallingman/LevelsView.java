@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 
 public class LevelsView {
 	public final float		W		= Gdx.graphics.getWidth();
@@ -18,13 +19,11 @@ public class LevelsView {
 	private float			buttonHeight;
 	private Sprite[][]		buttons;
 	private Texture			buttonTexture;
+	private Texture			buttonTextureOk;
 	private Texture			balloon;
 	public static Sprite	spriteBalloon;
 	private Random			rand	= new Random();
-	public static float[]	cloudeX;
-	public static float[]	cloudeY;
-	public static float[]	cloudeW;
-	public static float[]	cloudeH;
+	public static float[]	cloudeX, cloudeY, cloudeW, cloudeH;
 	private Sprite[]		spriteCloude;
 	private Texture[]		cloude;
 	private float			timer	= 0.0f;
@@ -33,7 +32,8 @@ public class LevelsView {
 		batch = new SpriteBatch();
 		font = new BitmapFont(Gdx.files.internal("data/8bit.fnt"), Gdx.files.internal("data/8bit.png"), false);
 		fontTitle = new BitmapFont(Gdx.files.internal("data/8bit.fnt"), Gdx.files.internal("data/8bit.png"), false);
-		buttonTexture = new Texture("button.png");
+		buttonTexture = new Texture("lvl_button.png");
+		buttonTextureOk = new Texture("lvl_btn_ok.png");
 		buttonWidth = buttonHeight = (Math.min(W, H) / 4) * 0.8f;
 		buttons = new Sprite[6][4];
 		float fontHeight = font.getLineHeight();
@@ -95,7 +95,7 @@ public class LevelsView {
 				buttons[i][j].draw(batch);
 				float x = buttons[i][j].getX();
 				float y = buttons[i][j].getY() + buttons[i][j].getHeight();
-				int counter = (5 - i) * 6 + j + 1;
+				int counter = (5 - i) * 4 + j + 1;
 				TextBounds bounds = font.getBounds("" + counter);
 				float dX = (buttons[i][j].getWidth() - bounds.width) / 2;
 				float dY = (buttons[i][j].getHeight() - bounds.height) / 2;
@@ -127,5 +127,16 @@ public class LevelsView {
 			spriteCloude[i].setPosition(cloudeX[i], cloudeY[i]);
 			spriteCloude[i].setSize(cloudeW[i], cloudeH[i]);
 		}
+	}
+
+	public void processClick(int x, int y) {
+		for (int i = 0; i < 6; i++)
+			for (int j = 0; j < 4; j++) {
+				Rectangle rect = new Rectangle(buttons[i][j].getX(), buttons[i][j].getY(), buttonWidth, buttonHeight);
+				if (rect.contains(x, y)) {
+					// Button "(5 - i) * 4 + j + 1" clicked
+					buttons[i][j].setTexture(buttonTextureOk);
+				}
+			}
 	}
 }

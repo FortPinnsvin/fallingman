@@ -31,7 +31,7 @@ public class AndroidRun implements ApplicationListener {
 		// AboutView
 		about = new AboutView();
 		about.create();
-		Gdx.input.setInputProcessor(new GameInputListener());
+		Gdx.input.setInputProcessor(new GameInputListener(this));
 		Gdx.input.setCatchBackKey(true);
 	}
 
