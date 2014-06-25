@@ -25,7 +25,6 @@ public class Menu extends AndroidRun {
 	private float				buttonHeight;
 	private Sprite[]			spriteCloude;
 	private Texture[]			cloude;
-	private GameInputListener	inputListener;
 	private LogicMenu			logicMenu;
 	private final String[]		BTN_LABELS	= {"Play", "Levels", "Scores", "About"};
 	private float				timer		= 0.0f;
@@ -35,7 +34,6 @@ public class Menu extends AndroidRun {
 		flagScrollButton = 0;
 		batch = new SpriteBatch();
 		font = new BitmapFont(Gdx.files.internal("data/8bit.fnt"), Gdx.files.internal("data/8bit.png"), false);
-		inputListener = new GameInputListener();
 		logicMenu = new LogicMenu();
 		balloon = new Texture("balloon.png");
 		spriteBalloon = new Sprite(balloon);
@@ -89,7 +87,6 @@ public class Menu extends AndroidRun {
 			spriteCloude[i].draw(batch);
 			spriteCloude[i].setX(spriteCloude[i].getX() - delta);
 		}
-		// setCloude();
 		for (int i = 0; i < 4; i++) {
 			spriteButton[i].draw(batch);
 			float x = spriteButton[i].getX();

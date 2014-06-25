@@ -4,13 +4,13 @@ import java.util.Random;
 import com.badlogic.gdx.Gdx;
 
 public class LogicMenu {
-	public float		W	= Gdx.graphics.getWidth();
-	public float		H	= Gdx.graphics.getHeight();
-	private float		buttonWidth;
-	private float		buttonHeight;
-	private float[]		buttonX;
-	private float[]		buttonY;
-	private Random		rand;
+	public float	W	= Gdx.graphics.getWidth();
+	public float	H	= Gdx.graphics.getHeight();
+	private float	buttonWidth;
+	private float	buttonHeight;
+	private float[]	buttonX;
+	private float[]	buttonY;
+	private Random	rand;
 
 	public LogicMenu() {
 		buttonWidth = (W - 100);
@@ -24,10 +24,10 @@ public class LogicMenu {
 		}
 	}
 
-	public void buttonClick(int screenX, int screenY) {
+	public void processClick(int x, int y) {
 		for (int i = 0; i < 4; i++) {
-			if (screenX >= buttonX[i] && screenX <= (buttonX[i] + buttonWidth) && Gdx.graphics.getHeight() - screenY > buttonY[i]
-					&& Gdx.graphics.getHeight() - screenY < (buttonY[i] + buttonHeight)) {
+			if (x >= buttonX[i] && x <= (buttonX[i] + buttonWidth) && Gdx.graphics.getHeight() - y > buttonY[i]
+					&& Gdx.graphics.getHeight() - y < (buttonY[i] + buttonHeight)) {
 				if (i == 3) AndroidRun.flagView = "Game";
 				if (i == 2) AndroidRun.flagView = "Levels";
 				if (i == 1) AndroidRun.flagView = "Menu";
