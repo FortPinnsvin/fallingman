@@ -31,7 +31,7 @@ public class LogicMenu {
 				if (i == 3) AndroidRun.flagView = "Game";
 				if (i == 2) AndroidRun.flagView = "Levels";
 				if (i == 1) AndroidRun.flagView = "Menu";
-				if (i == 0) AndroidRun.flagView = "Menu";
+				if (i == 0) AndroidRun.flagView = "About";
 				Menu.flagScrollButton = 1;
 			}
 		}

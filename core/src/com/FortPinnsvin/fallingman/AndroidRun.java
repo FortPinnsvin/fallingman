@@ -8,6 +8,7 @@ public class AndroidRun implements ApplicationListener {
 	public static String	flagView;
 	private GameView		game;
 	private LevelsView		levels;
+	private AboutView       about;
 	private Background		background;
 	private TimerAnimation	timerAnimation;
 
@@ -27,6 +28,9 @@ public class AndroidRun implements ApplicationListener {
 		// LevelsView
 		levels = new LevelsView();
 		levels.create();
+		// AboutView
+		about = new AboutView();
+		about.create();
 		Gdx.input.setInputProcessor(new GameInputListener());
 		Gdx.input.setCatchBackKey(true);
 	}
@@ -37,6 +41,7 @@ public class AndroidRun implements ApplicationListener {
 		if (flagView == "Menu" || !timerAnimation.timer()) menu.render();
 		if (flagView == "Game" && timerAnimation.timer()) game.render();
 		if (flagView == "Levels" && timerAnimation.timer()) levels.render();
+		if (flagView == "About" && timerAnimation.timer()) about.render();
 	}
 
 	@Override
