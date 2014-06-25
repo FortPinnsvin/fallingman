@@ -23,10 +23,7 @@ public class LevelsView {
 	private Texture			balloon;
 	public static Sprite	spriteBalloon;
 	private Random			rand	= new Random();
-	public static float[]	cloudeX;
-	public static float[]	cloudeY;
-	public static float[]	cloudeW;
-	public static float[]	cloudeH;
+	public static float[]	cloudeX, cloudeY, cloudeW, cloudeH;
 	private Sprite[]		spriteCloude;
 	private Texture[]		cloude;
 	private float			timer	= 0.0f;
