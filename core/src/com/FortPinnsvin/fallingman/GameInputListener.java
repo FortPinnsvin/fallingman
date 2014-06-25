@@ -5,9 +5,11 @@ import com.badlogic.gdx.InputProcessor;
 
 public class GameInputListener implements InputProcessor {
 	private LogicMenu	logicMenu;
+	private AndroidRun	androidRun;
 
-	public GameInputListener() {
-		logicMenu = new LogicMenu();
+	public GameInputListener(AndroidRun androidRun) {
+		this.logicMenu = new LogicMenu();
+		this.androidRun = androidRun;
 	}
 
 	@Override
@@ -18,8 +20,10 @@ public class GameInputListener implements InputProcessor {
 	@Override
 	public boolean keyUp(int keycode) {
 		if (keycode == Keys.BACK) {
-			if (AndroidRun.flagView.equals("Levels")) {AndroidRun.flagView = "Menu"; Menu.flagScrollButton = -1;}
-			else if (AndroidRun.flagView.equals("Menu")) System.exit(0);
+			if (AndroidRun.flagView.equals("Levels")) {
+				AndroidRun.flagView = "Menu";
+				Menu.flagScrollButton = -1;
+			} else if (AndroidRun.flagView.equals("Menu")) System.exit(0);
 		}
 		return false;
 	}
@@ -36,13 +40,14 @@ public class GameInputListener implements InputProcessor {
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		if (AndroidRun.flagView.equals("Menu")) logicMenu.buttonClick(screenX, screenY);
+		if (AndroidRun.flagView.equals("Menu")) logicMenu.processClick(screenX, screenY);
+		if (AndroidRun.flagView.equals("Levels")) androidRun.levels.processClick(screenX, screenY);
 		return false;
 	}
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		//logicMenu.draggedCloude(screenX, screenY);
+		// logicMenu.draggedCloude(screenX, screenY);
 		return false;
 	}
 

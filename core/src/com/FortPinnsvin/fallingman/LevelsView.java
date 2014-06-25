@@ -128,4 +128,12 @@ public class LevelsView {
 			spriteCloude[i].setSize(cloudeW[i], cloudeH[i]);
 		}
 	}
+
+	public void processClick(int x, int y) {
+		for (int i = 0; i < 6; i++)
+			for (int j = 0; j < 4; j++)
+				if (buttons[i][j].getBoundingRectangle().contains(x, y)) {
+					// Button "(5 - i) * 4 + j + 1" clicked
+				}
+	}
 }

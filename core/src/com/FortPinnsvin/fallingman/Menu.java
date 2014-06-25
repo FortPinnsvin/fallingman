@@ -34,7 +34,6 @@ public class Menu extends AndroidRun {
 		flagScrollButton = 0;
 		batch = new SpriteBatch();
 		font = new BitmapFont(Gdx.files.internal("data/8bit.fnt"), Gdx.files.internal("data/8bit.png"), false);
-		new GameInputListener();
 		logicMenu = new LogicMenu();
 		balloon = new Texture("balloon.png");
 		spriteBalloon = new Sprite(balloon);
