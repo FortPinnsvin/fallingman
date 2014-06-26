@@ -1,7 +1,6 @@
 package com.FortPinnsvin.fallingman;
 
 import java.util.Random;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class AboutView {
 	public final float		W		= Gdx.graphics.getWidth();
 	public final float		H		= Gdx.graphics.getHeight();
-	private BitmapFont		font, fontTitle;
+	private BitmapFont		fontTitle;
 	private SpriteBatch		batch;
 	private Texture			balloon;
 	public static Sprite	spriteBalloon;
@@ -25,11 +24,10 @@ public class AboutView {
 	private Sprite[]		spriteCloude;
 	private Texture[]		cloude;
 	private float			timer	= 0.0f;
-	private float 			yText;
-	
+	private float			yText;
+
 	public void create() {
 		batch = new SpriteBatch();
-		font = new BitmapFont(Gdx.files.internal("data/8bit.fnt"), Gdx.files.internal("data/8bit.png"), false);
 		fontTitle = new BitmapFont(Gdx.files.internal("data/8bit.fnt"), Gdx.files.internal("data/8bit.png"), false);
 		fontTitle.setScale((float) 0.7);
 		fontTitle.setColor(Color.BLUE);
@@ -73,20 +71,15 @@ public class AboutView {
 			spriteCloude[i].draw(batch);
 			spriteCloude[i].setX(spriteCloude[i].getX() - delta);
 		}
-		float xtext1 = fontTitle.getBounds("by FortPinnsvin").width;
-		float xtext2 = fontTitle.getBounds("Danik Tsyrkunov").width;
-		float xtext3 = fontTitle.getBounds("Alex Saskevich").width;
-		float xtext4 = fontTitle.getBounds("2014").width;
 		yText += 2;
-		if (yText > H+90 ) yText = -10;
-		fontTitle.drawWrapped(batch,"by FortPinnsvin", (W-xtext1)/2 ,  yText , W - 20);
-		fontTitle.drawWrapped(batch,"Danik Tsyrkunov", (W-xtext2)/2 ,  yText-30 , W - 20);
-		fontTitle.drawWrapped(batch,"Alex Saskevich", (W-xtext3)/2 ,  yText-60 , W - 20);
-		fontTitle.drawWrapped(batch,"2014", (W-xtext4)/2 ,  yText-90 , W - 20);
+		if (yText > H * 1.2) yText = -10;
+		fontTitle.drawWrapped(batch, "by FortPinnsvin\nDanik Tsyrkunov\nAlex Saskevich\n2014\n"
+				+ "\n\nTap on a balloon to send it into space\n\nMake it faster as you can\n\n"
+				+ "Every second and click counts\n\nHave fun", 0, yText, W, HAlignment.CENTER);
 		batch.end();
 		timer = timer + 0.03f;
 	}
-	
+
 	public void balloonRun() {
 		spriteBalloon.setPosition(spriteBalloon.getX() + (rand.nextInt(2) - 1), spriteBalloon.getY() + 2);
 		if (spriteBalloon.getY() > H) spriteBalloon.setPosition(W / 2, -H / 4);

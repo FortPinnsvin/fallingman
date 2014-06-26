@@ -4,6 +4,7 @@ import java.util.Random;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -31,6 +32,7 @@ public class GameView {
 	public Sprite		spriteFinish;
 	public boolean		flagFinish;
 	public long			time;
+	public boolean		isStart;
 
 	public void create() {
 		batch = new SpriteBatch();
@@ -63,6 +65,7 @@ public class GameView {
 		meters = 0;
 		step = 10;
 		time = System.currentTimeMillis();
+		isStart = false;
 		cloud = new Sprite[10];
 		for (int i = 0; i < cloud.length; i++) {
 			int num = (rand.nextInt(3) + 1);
@@ -95,8 +98,7 @@ public class GameView {
 		if (!flagFinish) {
 			font.draw(batch, clickCount + " clicks", font.getSpaceWidth(), H - font.getSpaceWidth());
 			font.draw(batch, meters + " meters", font.getSpaceWidth(), H - 2 * font.getSpaceWidth() - font.getLineHeight());
-			font.draw(batch, step + " meters/click", font.getSpaceWidth(), H - 3 * font.getSpaceWidth() - 2 * font.getLineHeight());
-			font.draw(batch, (System.currentTimeMillis() - time) + "", font.getSpaceWidth(), H - 4 * font.getSpaceWidth() - 3 * font.getLineHeight());
+			font.draw(batch, step + " m. per click", font.getSpaceWidth(), H - 3 * font.getSpaceWidth() - 2 * font.getLineHeight());
 		}
 		spriteShkala.draw(batch);
 		spriteMiniBalloon.draw(batch);
@@ -108,7 +110,7 @@ public class GameView {
 		if (meters > 8000 && spriteSattelite.getX() <= W) {
 			spriteSattelite.setPosition(spriteSattelite.getX() + 10, spriteSattelite.getY() - 3);
 		}
-		if (meters - (step / 10) >= 0) {
+		if (meters - (step / 10) >= 0 && isStart) {
 			meters -= (step / 10);
 			step = 10 + (clickCount * 10) / ((System.currentTimeMillis() - time) / 1000);
 		}
@@ -141,18 +143,24 @@ public class GameView {
 
 	public void processClick(int x, int y) {
 		if (spriteBalloon.getBoundingRectangle().contains(x, y) && !flagFinish) {
-			meters += step;
-			clickCount++;
-			step = 10 + (clickCount * 10) / ((System.currentTimeMillis() - time) / 1000);
-			spriteBg.setPosition(0, -meters);
-			spriteFinish.translateY(-step);
-			for (int i = 0; i < cloud.length; i++)
-				cloud[i].translateY(-step);
+			if (!isStart) {
+				time = System.currentTimeMillis() - 1001;
+				isStart = true;
+			} else {
+				meters += step;
+				clickCount++;
+				step = 10 + (clickCount * 10) / ((System.currentTimeMillis() - time) / 1000);
+				spriteBg.setPosition(0, -meters);
+				spriteFinish.translateY(-step);
+				for (int i = 0; i < cloud.length; i++)
+					cloud[i].translateY(-step);
+			}
 		}
 	}
 
 	public void renderFinishResult() {
-		font.draw(batch, "Coooool", (float) (W / 3.5), H / 2);
-		font.draw(batch, "You use " + clickCount + " click", W / 20, H / 2 - 30);
+		font.drawWrapped(batch, "Cooooooool\nYou make " + clickCount + " clicks", 0, H / 2, W, HAlignment.CENTER);
 	}
+
+	public void dispose() {}
 }
