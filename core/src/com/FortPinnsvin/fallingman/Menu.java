@@ -3,31 +3,33 @@ package com.FortPinnsvin.fallingman;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Menu extends AndroidRun {
-	public float				W			= Gdx.graphics.getWidth();
-	public float				H			= Gdx.graphics.getHeight();
-	public static float[]		cloudeX;
-	public static float[]		cloudeY;
-	public static float[]		cloudeW;
-	public static float[]		cloudeH;
-	private SpriteBatch			batch;
-	public static Sprite[]		spriteButton;
-	private Texture				button;
-	private Texture				balloon;
-	public static Sprite		spriteBalloon;
-	public static int			flagScrollButton;
-	private BitmapFont			font;
-	private float				buttonWidth;
-	private float				buttonHeight;
-	private Sprite[]			spriteCloude;
-	private Texture[]			cloude;
-	private LogicMenu			logicMenu;
-	private final String[]		BTN_LABELS	= {"Play", "Scores", "About", "Exit"};
-	private float				timer		= 0.0f;
+	public float			W			= Gdx.graphics.getWidth();
+	public float			H			= Gdx.graphics.getHeight();
+	public static float[]	cloudeX;
+	public static float[]	cloudeY;
+	public static float[]	cloudeW;
+	public static float[]	cloudeH;
+	private SpriteBatch		batch;
+	public static Sprite[]	spriteButton;
+	private Texture			button;
+	private Texture			balloon;
+	public static Sprite	spriteBalloon;
+	public static int		flagScrollButton;
+	private BitmapFont		font;
+	private float			buttonWidth;
+	private float			buttonHeight;
+	private Sprite[]		spriteCloude;
+	private Texture[]		cloude;
+	private LogicMenu		logicMenu;
+	private final String[]	BTN_LABELS	= {"Play", "Scores", "About", "Exit"};
+	public String			app_name	= "Flappy Montgolfiere";
+	private float			timer		= 0.0f;
 
 	@Override
 	public void create() {
@@ -96,6 +98,14 @@ public class Menu extends AndroidRun {
 			float dY = (spriteButton[i].getHeight() - bounds.height) / 2;
 			font.draw(batch, BTN_LABELS[BTN_LABELS.length - i - 1], x + dX, y - dY);
 		}
+		font.setScale(1.2f);
+		font.setColor(0, 0, 1, 1);
+		font.drawWrapped(batch, app_name, 0, H - H / 10, W, HAlignment.CENTER);
+		font.setScale(1f);
+		float fontHeight = font.getLineHeight();
+		float scale = (buttonHeight / fontHeight * 0.8f);
+		font.setScale(scale * 0.6f);
+		font.setColor(1, 1, 1, 1);
 		batch.end();
 		timer = timer + 0.03f;
 		if (flagScrollButton == 1) logicMenu.scrollButton();

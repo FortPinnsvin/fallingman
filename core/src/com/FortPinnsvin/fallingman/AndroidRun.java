@@ -6,10 +6,11 @@ import com.badlogic.gdx.Gdx;
 public class AndroidRun implements ApplicationListener {
 	private Menu			menu;
 	public static String	flagView;
-	public static GameView			game;
+	public static GameView	game;
 	private AboutView		about;
 	private Background		background;
 	private TimerAnimation	timerAnimation;
+	private ScoreView		score;
 
 	@Override
 	public void create() {
@@ -26,6 +27,9 @@ public class AndroidRun implements ApplicationListener {
 		// AboutView
 		about = new AboutView();
 		about.create();
+		// AboutView
+		score = new ScoreView();
+		score.create();
 		Gdx.input.setInputProcessor(new GameInputListener(this));
 		Gdx.input.setCatchBackKey(true);
 	}
@@ -36,6 +40,7 @@ public class AndroidRun implements ApplicationListener {
 		if (flagView == "Menu" || !timerAnimation.timer()) menu.render();
 		if (flagView == "Game" && timerAnimation.timer()) game.render();
 		if (flagView == "About" && timerAnimation.timer()) about.render();
+		if (flagView == "Scores" && timerAnimation.timer()) score.render();
 	}
 
 	@Override

@@ -19,8 +19,9 @@ public class ScoreView {
 	public void render() {
 		int[] arr = LocalStorage.loadResults();
 		batch.begin();
+		font.setColor(0, 0, 1, 1);
 		font.drawWrapped(batch, "Best results", 0, H - font.getSpaceWidth(), W, HAlignment.CENTER);
-		for (int i = 0; i < arr.length || i < 15; i++)
+		for (int i = 0; i < arr.length && i < 15; i++)
 			font.drawWrapped(batch, (i + 1) + "      " + arr[i], 0, H - H / 5 - (font.getSpaceWidth() + font.getLineHeight()) * i, W,
 					HAlignment.CENTER);
 		batch.end();
