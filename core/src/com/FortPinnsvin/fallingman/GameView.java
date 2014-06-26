@@ -10,31 +10,30 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class GameView {
-	public final int HEIGHT_BALLOON = 10000;
-	public float W = Gdx.graphics.getWidth();
-	public float H = Gdx.graphics.getHeight();
-	private Texture balloon;
-	public Sprite spriteBalloon;
-	public Texture bg;
-	public Sprite spriteBg;
-	public SpriteBatch batch;
-	public long clickCount, meters, step;
-	public BitmapFont font;
-	public Texture shkala;
-	public Sprite spriteShkala;
-	public Sprite spriteMiniBalloon;
-	public Sprite[] cloud;
-	public Random rand = new Random();
-	private Texture sattelite;
-	private Sprite spriteSattelite;
+	public final int	HEIGHT_BALLOON	= 10000;
+	public float		W				= Gdx.graphics.getWidth();
+	public float		H				= Gdx.graphics.getHeight();
+	private Texture		balloon;
+	public Sprite		spriteBalloon;
+	public Texture		bg;
+	public Sprite		spriteBg;
+	public SpriteBatch	batch;
+	public long			clickCount, meters, step;
+	public BitmapFont	font;
+	public Texture		shkala;
+	public Sprite		spriteShkala;
+	public Sprite		spriteMiniBalloon;
+	public Sprite[]		cloud;
+	public Random		rand			= new Random();
+	private Texture		sattelite;
+	private Sprite		spriteSattelite;
 	private Texture finish;
 	private Sprite spriteFinish;
 	private boolean flagFinish;
 
 	public void create() {
 		batch = new SpriteBatch();
-		font = new BitmapFont(Gdx.files.internal("data/8bit.fnt"),
-				Gdx.files.internal("data/8bit.png"), false);
+		font = new BitmapFont(Gdx.files.internal("data/8bit.fnt"), Gdx.files.internal("data/8bit.png"), false);
 		balloon = new Texture("balloon.png");
 		shkala = new Texture("Shkala.png");
 		sattelite = new Texture("Sattlite.png");
@@ -69,18 +68,17 @@ public class GameView {
 			Texture texture = new Texture("cloude" + num + ".png");
 			cloud[i] = new Sprite(texture);
 			switch (num) {
-			case 1:
-				cloud[i].setSize((float) (W / 2.2), H / 7);
-				break;
-			case 2:
-				cloud[i].setSize((float) (W / 3), H / 9);
-				break;
-			case 3:
-				cloud[i].setSize((float) (W / 2), H / 12);
-				break;
+				case 1 :
+					cloud[i].setSize((float) (W / 2.2), H / 7);
+					break;
+				case 2 :
+					cloud[i].setSize((float) (W / 3), H / 9);
+					break;
+				case 3 :
+					cloud[i].setSize((float) (W / 2), H / 12);
+					break;
 			}
-			cloud[i].setPosition(-W / 2 + W * rand.nextFloat(),
-					H + 5000 * rand.nextFloat());
+			cloud[i].setPosition(-W / 2 + W * rand.nextFloat(), H + 5000 * rand.nextFloat());
 		}
 	}
 
