@@ -21,7 +21,8 @@ public class ScoreView {
 		batch.begin();
 		font.setColor(0, 0, 1, 1);
 		font.drawWrapped(batch, "Best results", 0, H - font.getSpaceWidth(), W, HAlignment.CENTER);
-		for (int i = 0; i < arr.length && i < 15; i++)
+		if (arr.length < 1) font.drawWrapped(batch, "Play at least one game", 0, H / 2, W, HAlignment.CENTER);
+		else for (int i = 0; i < arr.length && i < 15; i++)
 			font.drawWrapped(batch, (i + 1) + "      " + arr[i], 0, H - H / 5 - (font.getSpaceWidth() + font.getLineHeight()) * i, W,
 					HAlignment.CENTER);
 		batch.end();
