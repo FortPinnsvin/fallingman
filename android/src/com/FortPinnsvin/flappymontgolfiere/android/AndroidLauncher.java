@@ -1,7 +1,7 @@
-package com.FortPinnsvin.fallingman.android;
+package com.FortPinnsvin.flappymontgolfiere.android;
 
 import android.os.Bundle;
-import com.FortPinnsvin.fallingman.AndroidRun;
+import com.FortPinnsvin.flappymontgolfiere.AndroidRun;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 

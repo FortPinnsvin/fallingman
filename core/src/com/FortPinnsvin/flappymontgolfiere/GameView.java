@@ -1,4 +1,4 @@
-package com.FortPinnsvin.fallingman;
+package com.FortPinnsvin.flappymontgolfiere;
 
 import java.util.Arrays;
 import java.util.Collections;

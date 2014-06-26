@@ -1,4 +1,4 @@
-package com.FortPinnsvin.fallingman;
+package com.FortPinnsvin.flappymontgolfiere;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Gdx;

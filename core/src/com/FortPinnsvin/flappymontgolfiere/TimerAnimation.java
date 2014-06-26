@@ -1,4 +1,4 @@
-package com.FortPinnsvin.fallingman;
+package com.FortPinnsvin.flappymontgolfiere;
 
 public class TimerAnimation {
 	private LogicMenu	logicMenu;
