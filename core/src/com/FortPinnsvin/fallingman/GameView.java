@@ -15,6 +15,8 @@ public class GameView {
 	private Texture			balloon;
 	public static Sprite	spriteBalloon;
 	private Texture			bg;
+	private Texture			sattelite;
+	private Sprite			spriteSattelite;
 	private Sprite			spriteBg;
 	private SpriteBatch		batch;
 	private long			clickCount, meters, step;
@@ -28,6 +30,7 @@ public class GameView {
 		font = new BitmapFont(Gdx.files.internal("data/8bit.fnt"), Gdx.files.internal("data/8bit.png"), false);
 		balloon = new Texture("balloon.png");
 		shkala = new Texture("Shkala.png");
+		sattelite = new Texture("Sattlite.png");
 		spriteBalloon = new Sprite(balloon);
 		spriteBalloon.setSize(W / 3, H / 4);
 		spriteBalloon.setPosition(W / 2 - W / 6, H / 8);
@@ -41,6 +44,9 @@ public class GameView {
 		spriteMiniBalloon = new Sprite(balloon);
 		spriteMiniBalloon.setPosition((float) (W / 1.05), 5);
 		spriteMiniBalloon.setSize(W - (float) (W / 1.05), H / 27);
+		spriteSattelite = new Sprite(sattelite);
+		spriteSattelite.setSize(W/3, H/10);
+		spriteSattelite.setPosition(spriteSattelite.getX()-(W/3), spriteBalloon.getY()+(H/3));
 		clickCount = 0;
 		meters = 0;
 		step = 10;
@@ -50,6 +56,7 @@ public class GameView {
 		renderGradient();
 		batch.begin();
 		spriteBg.draw(batch);
+		spriteSattelite.draw(batch);
 		spriteBalloon.draw(batch);
 		font.draw(batch, clickCount + " clicks", font.getSpaceWidth(), H - font.getSpaceWidth());
 		font.draw(batch, meters + " meters", font.getSpaceWidth(), H - 2 * font.getSpaceWidth() - font.getLineHeight());
@@ -58,6 +65,9 @@ public class GameView {
 		spriteMiniBalloon.draw(batch);
 		spriteMiniBalloon.setY((H*meters)/HEIGHT_BALLOON);
 		batch.end();
+		if (meters > 8000){
+			spriteSattelite.setPosition(spriteSattelite.getX()+10,spriteSattelite.getY()-3);
+		}
 		if (meters - (step / 10) >= 0) {
 			meters -= (step / 10);
 			step = 10 + (int) Math.hypot(meters / 25, meters / 500);
