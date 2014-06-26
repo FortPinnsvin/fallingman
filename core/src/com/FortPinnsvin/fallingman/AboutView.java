@@ -37,7 +37,7 @@ public class AboutView {
 		balloon = new Texture("balloon.png");
 		spriteBalloon = new Sprite(balloon);
 		spriteBalloon.setSize(W / 3, H / 4);
-		spriteBalloon.setPosition(W / 2, H/10);
+		spriteBalloon.setPosition(W / 2, -H / 4);
 		spriteCloude = new Sprite[3];
 		cloude = new Texture[3];
 		for (int i = 0; i < 3; i++) {
