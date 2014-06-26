@@ -1,7 +1,6 @@
 package com.FortPinnsvin.flappymontgolfiere;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Random;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,8 +10,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.utils.Disposable;
 
-public class GameView {
+public class GameView implements Disposable{
 	public final int	HEIGHT_BALLOON	= 10000;
 	public float		W				= Gdx.graphics.getWidth();
 	public float		H				= Gdx.graphics.getHeight();
@@ -61,7 +61,7 @@ public class GameView {
 		spriteSattelite.setPosition(spriteSattelite.getX() - (W / 3), spriteBalloon.getY() + (H / 3));
 		spriteFinish = new Sprite(finish);
 		spriteFinish.setSize(W, H / 5);
-		spriteFinish.setPosition(0,10000);
+		spriteFinish.setPosition(0, 10000);
 		flagFinish = false;
 		clickCount = 0;
 		meters = 0;
@@ -148,6 +148,7 @@ public class GameView {
 		shape.setColor(red / 255f, green / 255f, blue / 255f, 1);
 		shape.rect(0, 0, W, H);
 		shape.end();
+		shape.dispose();
 	}
 
 	public void processClick(int x, int y) {
@@ -179,6 +180,16 @@ public class GameView {
 		shkala.dispose();
 		sattelite.dispose();
 		finish.dispose();
-		for(int i = 0; i<cloud.length; i++ )cloud[i] = null;
+		for (int i = 0; i < cloud.length; i++)
+			cloud[i] = null;
+		Gdx.gl.glFlush();
+		balloon = null;
+		bg = null;
+		batch = null;
+		font = null;
+		shkala = null;
+		sattelite = null;
+		finish = null;
+		System.gc();
 	}
 }

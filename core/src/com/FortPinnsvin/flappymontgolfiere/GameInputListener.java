@@ -38,6 +38,7 @@ public class GameInputListener implements InputProcessor {
 				Menu.flagScrollButton = -1;
 			}
 		}
+		System.gc();
 		return false;
 	}
 
