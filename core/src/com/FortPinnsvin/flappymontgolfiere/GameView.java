@@ -61,7 +61,7 @@ public class GameView {
 		spriteSattelite.setPosition(spriteSattelite.getX() - (W / 3), spriteBalloon.getY() + (H / 3));
 		spriteFinish = new Sprite(finish);
 		spriteFinish.setSize(W, H / 5);
-		spriteFinish.setPosition(0, H + 10000);
+		spriteFinish.setPosition(0,10000);
 		flagFinish = false;
 		clickCount = 0;
 		meters = 0;
@@ -171,5 +171,14 @@ public class GameView {
 		font.drawWrapped(batch, "Cooooooool\nYou make " + clickCount + " clicks", 0, H / 2, W, HAlignment.CENTER);
 	}
 
-	public void dispose() {}
+	public void dispose() {
+		balloon.dispose();
+		bg.dispose();
+		batch.dispose();
+		font.dispose();
+		shkala.dispose();
+		sattelite.dispose();
+		finish.dispose();
+		for(int i = 0; i<cloud.length; i++ )cloud[i] = null;
+	}
 }

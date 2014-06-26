@@ -27,4 +27,9 @@ public class ScoreView {
 					HAlignment.CENTER);
 		batch.end();
 	}
+	
+	public void dispose() {
+		batch.dispose();
+		font.dispose();
+	}
 }

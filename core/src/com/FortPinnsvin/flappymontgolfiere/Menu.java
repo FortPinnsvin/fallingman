@@ -118,4 +118,14 @@ public class Menu extends AndroidRun {
 			spriteCloude[i].setSize(cloudeW[i], cloudeH[i]);
 		}
 	}
+	
+	public void dispose(){
+		batch.dispose();
+		button.dispose();
+		balloon.dispose();		
+		font.dispose();
+		for(int i = 0; i<cloude.length; i++ )cloude[i].dispose();
+		for(int i = 0; i<spriteCloude.length; i++ )spriteCloude[i] = null;
+		for(int i = 0; i<spriteButton.length; i++ )spriteButton[i] = null;
+	}
 }

@@ -4,13 +4,13 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 
 public class AndroidRun implements ApplicationListener {
-	private Menu			menu;
+	public static Menu			menu;
 	public static String	flagView;
 	public static GameView	game;
-	private AboutView		about;
+	public static AboutView		about;
 	private Background		background;
 	private TimerAnimation	timerAnimation;
-	private ScoreView		score;
+	public static ScoreView		score;
 
 	@Override
 	public void create() {
@@ -38,9 +38,9 @@ public class AndroidRun implements ApplicationListener {
 	public void render() {
 		background.render();
 		if (flagView == "Menu" || !timerAnimation.timer()) menu.render();
-		if (flagView == "Game" && timerAnimation.timer()) game.render();
-		if (flagView == "About" && timerAnimation.timer()) about.render();
-		if (flagView == "Scores" && timerAnimation.timer()) score.render();
+		if (flagView == "Game" && timerAnimation.timer()) {game.render(); }
+		if (flagView == "About" && timerAnimation.timer()) {about.render(); }
+		if (flagView == "Scores" && timerAnimation.timer()) {score.render(); }
 	}
 
 	@Override
@@ -53,5 +53,9 @@ public class AndroidRun implements ApplicationListener {
 	public void resume() {}
 
 	@Override
-	public void dispose() {}
+	public void dispose() {
+		menu.dispose();
+		game.dispose();
+		about.dispose();
+	}
 }

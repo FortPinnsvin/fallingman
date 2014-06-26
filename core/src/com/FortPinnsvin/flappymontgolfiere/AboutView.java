@@ -91,4 +91,11 @@ public class AboutView {
 			spriteCloude[i].setSize(cloudeW[i], cloudeH[i]);
 		}
 	}
+	
+	public void dispose(){
+		batch.dispose();
+		balloon.dispose();		
+		for(int i = 0; i<cloude.length; i++ )cloude[i].dispose();
+		for(int i = 0; i<spriteCloude.length; i++ )spriteCloude[i] = null;
+	}
 }
