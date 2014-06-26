@@ -25,11 +25,12 @@ public class GameView {
 	public Sprite		spriteMiniBalloon;
 	public Sprite[]		cloud;
 	public Random		rand			= new Random();
-	private Texture		sattelite;
-	private Sprite		spriteSattelite;
-	private Texture finish;
-	private Sprite spriteFinish;
-	private boolean flagFinish;
+	public Texture		sattelite;
+	public Sprite		spriteSattelite;
+	public Texture		finish;
+	public Sprite		spriteFinish;
+	public boolean		flagFinish;
+	public long			time;
 
 	public void create() {
 		batch = new SpriteBatch();
@@ -53,8 +54,7 @@ public class GameView {
 		spriteMiniBalloon.setSize(W - (float) (W / 1.05), H / 27);
 		spriteSattelite = new Sprite(sattelite);
 		spriteSattelite.setSize(W / 3, H / 10);
-		spriteSattelite.setPosition(spriteSattelite.getX() - (W / 3),
-				spriteBalloon.getY() + (H / 3));
+		spriteSattelite.setPosition(spriteSattelite.getX() - (W / 3), spriteBalloon.getY() + (H / 3));
 		spriteFinish = new Sprite(finish);
 		spriteFinish.setSize(W, H / 5);
 		spriteFinish.setPosition(0, H + 10000);
@@ -62,6 +62,7 @@ public class GameView {
 		clickCount = 0;
 		meters = 0;
 		step = 10;
+		time = System.currentTimeMillis();
 		cloud = new Sprite[10];
 		for (int i = 0; i < cloud.length; i++) {
 			int num = (rand.nextInt(3) + 1);
@@ -92,12 +93,10 @@ public class GameView {
 		for (int i = 0; i < cloud.length; i++)
 			cloud[i].draw(batch);
 		if (!flagFinish) {
-			font.draw(batch, clickCount + " clicks", font.getSpaceWidth(), H
-					- font.getSpaceWidth());
-			font.draw(batch, meters + " meters", font.getSpaceWidth(), H - 2
-					* font.getSpaceWidth() - font.getLineHeight());
-			font.draw(batch, step + " meters/click", font.getSpaceWidth(), H
-					- 3 * font.getSpaceWidth() - 2 * font.getLineHeight());
+			font.draw(batch, clickCount + " clicks", font.getSpaceWidth(), H - font.getSpaceWidth());
+			font.draw(batch, meters + " meters", font.getSpaceWidth(), H - 2 * font.getSpaceWidth() - font.getLineHeight());
+			font.draw(batch, step + " meters/click", font.getSpaceWidth(), H - 3 * font.getSpaceWidth() - 2 * font.getLineHeight());
+			font.draw(batch, (System.currentTimeMillis() - time) + "", font.getSpaceWidth(), H - 4 * font.getSpaceWidth() - 3 * font.getLineHeight());
 		}
 		spriteShkala.draw(batch);
 		spriteMiniBalloon.draw(batch);
@@ -107,22 +106,19 @@ public class GameView {
 		}
 		batch.end();
 		if (meters > 8000 && spriteSattelite.getX() <= W) {
-			spriteSattelite.setPosition(spriteSattelite.getX() + 10,
-					spriteSattelite.getY() - 3);
+			spriteSattelite.setPosition(spriteSattelite.getX() + 10, spriteSattelite.getY() - 3);
 		}
 		if (meters - (step / 10) >= 0) {
 			meters -= (step / 10);
-			step = 10 + (int) Math.hypot(meters / 25, 100);
+			step = 10 + (clickCount * 10) / ((System.currentTimeMillis() - time) / 1000);
 		}
 		spriteBg.setPosition(0, -meters);
 		spriteFinish.translateY(step / 10);
 		for (int i = 0; i < cloud.length; i++)
 			cloud[i].translateY(step / 10);
-
 		if (meters >= HEIGHT_BALLOON) {
 			flagFinish = true;
 		}
-
 	}
 
 	public void renderGradient() {
@@ -147,7 +143,7 @@ public class GameView {
 		if (spriteBalloon.getBoundingRectangle().contains(x, y) && !flagFinish) {
 			meters += step;
 			clickCount++;
-			step = 10 + (int) Math.hypot(meters / 25, 100);
+			step = 10 + (clickCount * 10) / ((System.currentTimeMillis() - time) / 1000);
 			spriteBg.setPosition(0, -meters);
 			spriteFinish.translateY(-step);
 			for (int i = 0; i < cloud.length; i++)
@@ -156,7 +152,7 @@ public class GameView {
 	}
 
 	public void renderFinishResult() {
-		font.draw(batch, "Coooool", (float)(W / 3.5), H / 2);
+		font.draw(batch, "Coooool", (float) (W / 3.5), H / 2);
 		font.draw(batch, "You use " + clickCount + " click", W / 20, H / 2 - 30);
 	}
 }
