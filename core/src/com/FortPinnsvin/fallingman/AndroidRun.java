@@ -12,6 +12,7 @@ public class AndroidRun implements ApplicationListener {
 	public static String	flagView;
 	public static GameView	game;
 	private AboutView		about;
+	private ScoreView		score;
 	private Background		background;
 	private TimerAnimation	timerAnimation;
 	private boolean			isLoaded	= false;
@@ -41,6 +42,10 @@ public class AndroidRun implements ApplicationListener {
 		// AboutView
 		about = new AboutView();
 		about.create();
+		// ScoreView
+		score = new ScoreView();
+		score.create();
+		// ////////////////
 		flagView = "Menu";
 		isLoaded = true;
 	}
@@ -54,6 +59,7 @@ public class AndroidRun implements ApplicationListener {
 			if (flagView == "Menu" || !timerAnimation.timer()) menu.render();
 			if (flagView == "Game" && timerAnimation.timer()) game.render();
 			if (flagView == "About" && timerAnimation.timer()) about.render();
+			if (flagView == "Scores" && timerAnimation.timer()) score.render();
 		} else {
 			batch.begin();
 			font.drawWrapped(batch, "Loading...", 0, H / 2, W, HAlignment.CENTER);

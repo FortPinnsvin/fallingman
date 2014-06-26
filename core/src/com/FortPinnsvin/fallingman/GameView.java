@@ -1,5 +1,7 @@
 package com.FortPinnsvin.fallingman;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -118,8 +120,15 @@ public class GameView {
 		spriteFinish.translateY(step / 10);
 		for (int i = 0; i < cloud.length; i++)
 			cloud[i].translateY(step / 10);
-		if (meters >= HEIGHT_BALLOON) {
+		if (meters >= HEIGHT_BALLOON && !flagFinish) {
 			flagFinish = true;
+			int[] results = LocalStorage.loadResults();
+			int len = results.length;
+			int[] new_arr = new int[len + 1];
+			System.arraycopy(results, 0, new_arr, 0, len);
+			new_arr[len] = (int) clickCount;
+			Arrays.sort(new_arr);
+			LocalStorage.saveResults(new_arr);
 		}
 	}
 

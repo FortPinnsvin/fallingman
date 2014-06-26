@@ -32,7 +32,7 @@ public class LogicMenu {
 					AndroidRun.game.create();
 					AndroidRun.flagView = "Game";
 				}
-				if (i == 2) AndroidRun.flagView = "Menu";
+				if (i == 2) AndroidRun.flagView = "Scores";
 				if (i == 1) AndroidRun.flagView = "About";
 				if (i == 0) System.exit(0);
 				Menu.flagScrollButton = 1;
