@@ -147,7 +147,7 @@ public class GameView {
 		if (spriteBalloon.getBoundingRectangle().contains(x, y) && !flagFinish) {
 			meters += step;
 			clickCount++;
-			step = 10 + (int) Math.hypot(meters / 25, 100);
+			step = 10+ (int) Math.hypot(meters / 25, 100);
 			spriteBg.setPosition(0, -meters);
 			spriteFinish.translateY(-step);
 			for (int i = 0; i < cloud.length; i++)
