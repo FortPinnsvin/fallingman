@@ -12,7 +12,7 @@ public class GameView {
 	private Texture			balloon;
 	public static Sprite	spriteBalloon;
 	private SpriteBatch		batch;
-	private long			clickCount;
+	private long			clickCount, meters;
 	private BitmapFont		font;
 
 	public void create() {
@@ -23,19 +23,23 @@ public class GameView {
 		spriteBalloon.setSize(W / 3, H / 4);
 		spriteBalloon.setPosition(W / 2 - W / 6, H / 8);
 		clickCount = 0;
+		meters = 0;
 	}
 
 	public void render() {
 		batch.begin();
 		spriteBalloon.draw(batch);
-		spriteBalloon.translateY(-1f);
-		font.draw(batch, clickCount + " clicks", font.getSpaceWidth(), H - font.getLineHeight() - font.getSpaceWidth());
+		if (meters - 1 >= 0) {
+			meters -= 1;
+		}
+		font.draw(batch, clickCount + " clicks", font.getSpaceWidth(), H - font.getSpaceWidth());
+		font.draw(batch, meters + " meters", font.getSpaceWidth(), H - 2 * font.getSpaceWidth() - font.getLineHeight());
 		batch.end();
 	}
 
 	public void processClick(int x, int y) {
 		if (spriteBalloon.getBoundingRectangle().contains(x, y)) {
-			spriteBalloon.translateY(10);
+			meters += 10;
 			clickCount++;
 		}
 	}
