@@ -155,4 +155,8 @@ public class GameView {
 		font.draw(batch, "Coooool", (float) (W / 3.5), H / 2);
 		font.draw(batch, "You use " + clickCount + " click", W / 20, H / 2 - 30);
 	}
+	
+	public void dispose() {
+		
+	}
 }
