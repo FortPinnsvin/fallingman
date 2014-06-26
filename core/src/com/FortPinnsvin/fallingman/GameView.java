@@ -83,7 +83,8 @@ public class GameView {
 		shape.rect(0, 0, W, H);
 		shape.end();
 	}
-
+		
+		
 	public void renderGround() {
 		ShapeRenderer shape = new ShapeRenderer();
 		shape.begin(ShapeType.Filled);
