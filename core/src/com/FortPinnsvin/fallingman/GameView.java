@@ -33,8 +33,8 @@ public class GameView {
 		sattelite = new Texture("Sattlite.png");
 		spriteBalloon = new Sprite(balloon);
 		spriteBalloon.setSize(W / 3, H / 4);
-		spriteBalloon.setPosition(W / 2 - W / 6, H / 8);
-		bg = new Texture("bg.png");
+		spriteBalloon.setPosition(W / 2 - W / 6, H / 15);
+		bg = new Texture("bg-1-mini.png");
 		spriteBg = new Sprite(bg);
 		spriteBg.setPosition(0, 0);
 		spriteBg.setSize(W, H);
@@ -65,14 +65,13 @@ public class GameView {
 		spriteMiniBalloon.draw(batch);
 		spriteMiniBalloon.setY((H * meters) / HEIGHT_BALLOON);
 		batch.end();
-		if (meters > 8000){
+		if (meters > 8000 && spriteSattelite.getX() <= W){
 			spriteSattelite.setPosition(spriteSattelite.getX()+10,spriteSattelite.getY()-3);
 		}
 		if (meters - (step / 10) >= 0) {
 			meters -= (step / 10);
 			step = 10 + (int) Math.hypot(meters / 25, 100);
 		}
-		renderGround();
 		spriteBg.setPosition(0, -meters);
 	}
 
@@ -94,13 +93,7 @@ public class GameView {
 		shape.end();
 	}
 
-	public void renderGround() {
-		ShapeRenderer shape = new ShapeRenderer();
-		shape.begin(ShapeType.Filled);
-		shape.setColor(0, 1, 0, 1);
-		shape.rect(0, 0, (float) (W / 1.05), H / 8 - meters);
-		shape.end();
-	}
+
 
 	public void processClick(int x, int y) {
 		if (spriteBalloon.getBoundingRectangle().contains(x, y)) {
