@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class GameView {
-	public final int HEIGHT_BALLOON = 10000;
-	public float			W	= Gdx.graphics.getWidth();
-	public float			H	= Gdx.graphics.getHeight();
+	public final int		HEIGHT_BALLOON	= 10000;
+	public float			W				= Gdx.graphics.getWidth();
+	public float			H				= Gdx.graphics.getHeight();
 	private Texture			balloon;
 	public static Sprite	spriteBalloon;
 	private Texture			bg;
@@ -63,14 +63,14 @@ public class GameView {
 		font.draw(batch, step + " meters/click", font.getSpaceWidth(), H - 3 * font.getSpaceWidth() - 2 * font.getLineHeight());
 		spriteShkala.draw(batch);
 		spriteMiniBalloon.draw(batch);
-		spriteMiniBalloon.setY((H*meters)/HEIGHT_BALLOON);
+		spriteMiniBalloon.setY((H * meters) / HEIGHT_BALLOON);
 		batch.end();
 		if (meters > 8000){
 			spriteSattelite.setPosition(spriteSattelite.getX()+10,spriteSattelite.getY()-3);
 		}
 		if (meters - (step / 10) >= 0) {
 			meters -= (step / 10);
-			step = 10 + (int) Math.hypot(meters / 25, meters / 500);
+			step = 10 + (int) Math.hypot(meters / 25, 100);
 		}
 		renderGround();
 		spriteBg.setPosition(0, -meters);
@@ -79,9 +79,9 @@ public class GameView {
 	public void renderGradient() {
 		float red, green, blue;
 		if (meters > H) {
-			blue = 255 - ((float) meters / 10000f) * 255;
-			red = 88 - ((float) meters / 10000f) * 88;
-			green = 190 - ((float) meters / 10000f) * 190;
+			blue = 255 - ((float) meters / HEIGHT_BALLOON) * 255;
+			red = 88 - ((float) meters / HEIGHT_BALLOON) * 88;
+			green = 190 - ((float) meters / HEIGHT_BALLOON) * 190;
 		} else {
 			blue = 255;
 			green = 190;
@@ -93,8 +93,7 @@ public class GameView {
 		shape.rect(0, 0, W, H);
 		shape.end();
 	}
-		
-		
+
 	public void renderGround() {
 		ShapeRenderer shape = new ShapeRenderer();
 		shape.begin(ShapeType.Filled);
@@ -107,7 +106,7 @@ public class GameView {
 		if (spriteBalloon.getBoundingRectangle().contains(x, y)) {
 			meters += step;
 			clickCount++;
-			step = 10 + (int) Math.hypot(meters / 25, meters / 500);
+			step = 10 + (int) Math.hypot(meters / 25, 100);
 			spriteBg.setPosition(0, -meters);
 		}
 	}
