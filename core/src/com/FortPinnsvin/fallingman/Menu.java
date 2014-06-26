@@ -26,7 +26,7 @@ public class Menu extends AndroidRun {
 	private Sprite[]			spriteCloude;
 	private Texture[]			cloude;
 	private LogicMenu			logicMenu;
-	private final String[]		BTN_LABELS	= {"Play", "Levels", "Scores", "About"};
+	private final String[]		BTN_LABELS	= {"Play", "Scores", "About", "Exit"};
 	private float				timer		= 0.0f;
 
 	@Override
