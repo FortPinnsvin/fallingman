@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class GameView {
+	public final int HEIGHT_BALLOON = 10000;
 	public float			W	= Gdx.graphics.getWidth();
 	public float			H	= Gdx.graphics.getHeight();
 	private Texture			balloon;
@@ -55,6 +56,7 @@ public class GameView {
 		font.draw(batch, step + " meters/click", font.getSpaceWidth(), H - 3 * font.getSpaceWidth() - 2 * font.getLineHeight());
 		spriteShkala.draw(batch);
 		spriteMiniBalloon.draw(batch);
+		spriteMiniBalloon.setY((H*meters)/HEIGHT_BALLOON);
 		batch.end();
 		if (meters - (step / 10) >= 0) {
 			meters -= (step / 10);
