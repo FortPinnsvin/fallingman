@@ -30,6 +30,10 @@ public class GameInputListener implements InputProcessor {
 				AndroidRun.flagView = "Menu";
 				Menu.flagScrollButton = -1;
 			} else if (AndroidRun.flagView.equals("Menu")) System.exit(0);
+			else if (AndroidRun.flagView.equals("Game")) {
+				AndroidRun.flagView = "Menu";
+				Menu.flagScrollButton = -1;
+			}
 		}
 		return false;
 	}
@@ -47,7 +51,7 @@ public class GameInputListener implements InputProcessor {
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		if (AndroidRun.flagView.equals("Menu")) logicMenu.processClick(screenX, screenY);
-		if (AndroidRun.flagView.equals("Levels")) androidRun.levels.processClick(screenX, (int) (H - screenY));
+		if (AndroidRun.flagView.equals("Game")) androidRun.game.processClick(screenX, (int) H - screenY);
 		return false;
 	}
 
