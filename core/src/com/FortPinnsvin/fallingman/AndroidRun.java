@@ -6,7 +6,7 @@ import com.badlogic.gdx.Gdx;
 public class AndroidRun implements ApplicationListener {
 	private Menu			menu;
 	public static String	flagView;
-	public GameView			game;
+	public static GameView			game;
 	private AboutView		about;
 	private Background		background;
 	private TimerAnimation	timerAnimation;
@@ -20,7 +20,6 @@ public class AndroidRun implements ApplicationListener {
 		menu.create();
 		// GameView
 		game = new GameView();
-		game.create();
 		// BackgroundView
 		background = new Background();
 		background.create();
