@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GameView {
+	public final int HEIGHT_BALLOON = 10000;
 	public float W = Gdx.graphics.getWidth();
 	public float H = Gdx.graphics.getHeight();
 	private Texture balloon;
@@ -50,7 +51,8 @@ public class GameView {
 				H - font.getSpaceWidth());
 		font.draw(batch, meters + " meters", font.getSpaceWidth(),
 				H - 2 * font.getSpaceWidth() - font.getLineHeight());
-
+		
+		spriteMiniBalloon.setY((H*meters)/HEIGHT_BALLOON);
 		batch.end();
 	}
 
