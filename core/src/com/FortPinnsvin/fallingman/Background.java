@@ -15,7 +15,7 @@ public class Background {
 
 	public void create() {
 		batch = new SpriteBatch();
-		bg = new Texture("bg.png");
+		bg = new Texture("bg-1-mini.png");
 		spriteBg = new Sprite(bg);
 		spriteBg.setPosition(0, 0);
 		spriteBg.setSize(WIDTH, HEIGHT);

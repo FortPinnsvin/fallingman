@@ -1,7 +1,6 @@
 package com.FortPinnsvin.fallingman;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -19,11 +18,15 @@ public class GameView {
 	private SpriteBatch		batch;
 	private long			clickCount, meters, step;
 	private BitmapFont		font;
+	private Texture			shkala;
+	private Sprite			spriteShkala;
+	public static Sprite	spriteMiniBalloon;
 
 	public void create() {
 		batch = new SpriteBatch();
 		font = new BitmapFont(Gdx.files.internal("data/8bit.fnt"), Gdx.files.internal("data/8bit.png"), false);
 		balloon = new Texture("balloon.png");
+		shkala = new Texture("Shkala.png");
 		spriteBalloon = new Sprite(balloon);
 		spriteBalloon.setSize(W / 3, H / 4);
 		spriteBalloon.setPosition(W / 2 - W / 6, H / 8);
@@ -31,6 +34,12 @@ public class GameView {
 		spriteBg = new Sprite(bg);
 		spriteBg.setPosition(0, 0);
 		spriteBg.setSize(W, H);
+		spriteShkala = new Sprite(shkala);
+		spriteShkala.setPosition((float) (W / 1.05), 0);
+		spriteShkala.setSize(W - (float) (W / 1.05), H);
+		spriteMiniBalloon = new Sprite(balloon);
+		spriteMiniBalloon.setPosition((float) (W / 1.05), 5);
+		spriteMiniBalloon.setSize(W - (float) (W / 1.05), H / 27);
 		clickCount = 0;
 		meters = 0;
 		step = 10;
@@ -44,6 +53,8 @@ public class GameView {
 		font.draw(batch, clickCount + " clicks", font.getSpaceWidth(), H - font.getSpaceWidth());
 		font.draw(batch, meters + " meters", font.getSpaceWidth(), H - 2 * font.getSpaceWidth() - font.getLineHeight());
 		font.draw(batch, step + " meters/click", font.getSpaceWidth(), H - 3 * font.getSpaceWidth() - 2 * font.getLineHeight());
+		spriteShkala.draw(batch);
+		spriteMiniBalloon.draw(batch);
 		batch.end();
 		if (meters - (step / 10) >= 0) {
 			meters -= (step / 10);
