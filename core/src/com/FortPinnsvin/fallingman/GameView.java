@@ -1,6 +1,7 @@
 package com.FortPinnsvin.fallingman;
 
 import java.util.Random;
+import android.graphics.Point;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -25,16 +26,19 @@ public class GameView {
 	public Sprite		spriteMiniBalloon;
 	public Sprite[]		cloud;
 	public Random		rand			= new Random();
+	private Texture		sattelite;
+	private Sprite		spriteSattelite;
 
 	public void create() {
 		batch = new SpriteBatch();
 		font = new BitmapFont(Gdx.files.internal("data/8bit.fnt"), Gdx.files.internal("data/8bit.png"), false);
 		balloon = new Texture("balloon.png");
 		shkala = new Texture("Shkala.png");
+		sattelite = new Texture("Sattlite.png");
 		spriteBalloon = new Sprite(balloon);
 		spriteBalloon.setSize(W / 3, H / 4);
-		spriteBalloon.setPosition(W / 2 - W / 6, H / 8);
-		bg = new Texture("bg.png");
+		spriteBalloon.setPosition(W / 2 - W / 6, H / 15);
+		bg = new Texture("bg-1-mini.png");
 		spriteBg = new Sprite(bg);
 		spriteBg.setPosition(0, 0);
 		spriteBg.setSize(W, H);
@@ -44,6 +48,9 @@ public class GameView {
 		spriteMiniBalloon = new Sprite(balloon);
 		spriteMiniBalloon.setPosition((float) (W / 1.05), 5);
 		spriteMiniBalloon.setSize(W - (float) (W / 1.05), H / 27);
+		spriteSattelite = new Sprite(sattelite);
+		spriteSattelite.setSize(W / 3, H / 10);
+		spriteSattelite.setPosition(spriteSattelite.getX() - (W / 3), spriteBalloon.getY() + (H / 3));
 		clickCount = 0;
 		meters = 0;
 		step = 10;
@@ -71,6 +78,7 @@ public class GameView {
 		renderGradient();
 		batch.begin();
 		spriteBg.draw(batch);
+		spriteSattelite.draw(batch);
 		spriteBalloon.draw(batch);
 		for (int i = 0; i < cloud.length; i++)
 			cloud[i].draw(batch);
@@ -81,11 +89,13 @@ public class GameView {
 		spriteMiniBalloon.draw(batch);
 		spriteMiniBalloon.setY((H * meters) / HEIGHT_BALLOON);
 		batch.end();
+		if (meters > 8000 && spriteSattelite.getX() <= W) {
+			spriteSattelite.setPosition(spriteSattelite.getX() + 10, spriteSattelite.getY() - 3);
+		}
 		if (meters - (step / 10) >= 0) {
 			meters -= (step / 10);
 			step = 10 + (int) Math.hypot(meters / 25, 100);
 		}
-		renderGround();
 		spriteBg.setPosition(0, -meters);
 		for (int i = 0; i < cloud.length; i++)
 			cloud[i].translateY(step / 10);
@@ -106,14 +116,6 @@ public class GameView {
 		shape.begin(ShapeType.Filled);
 		shape.setColor(red / 255f, green / 255f, blue / 255f, 1);
 		shape.rect(0, 0, W, H);
-		shape.end();
-	}
-
-	public void renderGround() {
-		ShapeRenderer shape = new ShapeRenderer();
-		shape.begin(ShapeType.Filled);
-		shape.setColor(0, 1, 0, 1);
-		shape.rect(0, 0, (float) (W / 1.05), H / 8 - meters);
 		shape.end();
 	}
 
