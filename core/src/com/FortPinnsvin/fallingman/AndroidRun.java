@@ -7,7 +7,7 @@ public class AndroidRun implements ApplicationListener {
 	private Menu			menu;
 	public static String	flagView;
 	private GameView		game;
-	private LevelsView		levels;
+	public LevelsView		levels;
 	private AboutView       about;
 	private Background		background;
 	private TimerAnimation	timerAnimation;

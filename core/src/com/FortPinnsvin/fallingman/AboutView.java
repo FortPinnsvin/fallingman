@@ -78,6 +78,7 @@ public class AboutView {
 		float xtext3 = fontTitle.getBounds("Alex Saskevich").width;
 		float xtext4 = fontTitle.getBounds("2014").width;
 		yText += 2;
+		if (yText > H+90 ) yText = -10;
 		fontTitle.drawWrapped(batch,"by FortPinnsvin", (W-xtext1)/2 ,  yText , W - 20);
 		fontTitle.drawWrapped(batch,"Danik Tsyrkunov", (W-xtext2)/2 ,  yText-30 , W - 20);
 		fontTitle.drawWrapped(batch,"Alex Saskevich", (W-xtext3)/2 ,  yText-60 , W - 20);
