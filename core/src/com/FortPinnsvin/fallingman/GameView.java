@@ -1,5 +1,6 @@
 package com.FortPinnsvin.fallingman;
 
+import java.util.Random;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -9,19 +10,21 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class GameView {
-	public final int HEIGHT_BALLOON = 10000;
-	public float			W	= Gdx.graphics.getWidth();
-	public float			H	= Gdx.graphics.getHeight();
-	private Texture			balloon;
-	public static Sprite	spriteBalloon;
-	private Texture			bg;
-	private Sprite			spriteBg;
-	private SpriteBatch		batch;
-	private long			clickCount, meters, step;
-	private BitmapFont		font;
-	private Texture			shkala;
-	private Sprite			spriteShkala;
-	public static Sprite	spriteMiniBalloon;
+	public final int	HEIGHT_BALLOON	= 10000;
+	public float		W				= Gdx.graphics.getWidth();
+	public float		H				= Gdx.graphics.getHeight();
+	private Texture		balloon;
+	public Sprite		spriteBalloon;
+	public Texture		bg;
+	public Sprite		spriteBg;
+	public SpriteBatch	batch;
+	public long			clickCount, meters, step;
+	public BitmapFont	font;
+	public Texture		shkala;
+	public Sprite		spriteShkala;
+	public Sprite		spriteMiniBalloon;
+	public Sprite[]		cloud;
+	public Random		rand			= new Random();
 
 	public void create() {
 		batch = new SpriteBatch();
@@ -44,6 +47,24 @@ public class GameView {
 		clickCount = 0;
 		meters = 0;
 		step = 10;
+		cloud = new Sprite[10];
+		for (int i = 0; i < cloud.length; i++) {
+			int num = (rand.nextInt(3) + 1);
+			Texture texture = new Texture("cloude" + num + ".png");
+			cloud[i] = new Sprite(texture);
+			switch (num) {
+				case 1 :
+					cloud[i].setSize((float) (W / 2.2), H / 7);
+					break;
+				case 2 :
+					cloud[i].setSize((float) (W / 3), H / 9);
+					break;
+				case 3 :
+					cloud[i].setSize((float) (W / 2), H / 12);
+					break;
+			}
+			cloud[i].setPosition(-W / 2 + W * rand.nextFloat(), H + 5000 * rand.nextFloat());
+		}
 	}
 
 	public void render() {
@@ -51,27 +72,31 @@ public class GameView {
 		batch.begin();
 		spriteBg.draw(batch);
 		spriteBalloon.draw(batch);
+		for (int i = 0; i < cloud.length; i++)
+			cloud[i].draw(batch);
 		font.draw(batch, clickCount + " clicks", font.getSpaceWidth(), H - font.getSpaceWidth());
 		font.draw(batch, meters + " meters", font.getSpaceWidth(), H - 2 * font.getSpaceWidth() - font.getLineHeight());
 		font.draw(batch, step + " meters/click", font.getSpaceWidth(), H - 3 * font.getSpaceWidth() - 2 * font.getLineHeight());
 		spriteShkala.draw(batch);
 		spriteMiniBalloon.draw(batch);
-		spriteMiniBalloon.setY((H*meters)/HEIGHT_BALLOON);
+		spriteMiniBalloon.setY((H * meters) / HEIGHT_BALLOON);
 		batch.end();
 		if (meters - (step / 10) >= 0) {
 			meters -= (step / 10);
-			step = 10 + (int) Math.hypot(meters / 25, meters / 500);
+			step = 10 + (int) Math.hypot(meters / 25, 100);
 		}
 		renderGround();
 		spriteBg.setPosition(0, -meters);
+		for (int i = 0; i < cloud.length; i++)
+			cloud[i].translateY(step / 10);
 	}
 
 	public void renderGradient() {
 		float red, green, blue;
 		if (meters > H) {
-			blue = 255 - ((float) meters / 10000f) * 255;
-			red = 88 - ((float) meters / 10000f) * 88;
-			green = 190 - ((float) meters / 10000f) * 190;
+			blue = 255 - ((float) meters / HEIGHT_BALLOON) * 255;
+			red = 88 - ((float) meters / HEIGHT_BALLOON) * 88;
+			green = 190 - ((float) meters / HEIGHT_BALLOON) * 190;
 		} else {
 			blue = 255;
 			green = 190;
@@ -83,8 +108,7 @@ public class GameView {
 		shape.rect(0, 0, W, H);
 		shape.end();
 	}
-		
-		
+
 	public void renderGround() {
 		ShapeRenderer shape = new ShapeRenderer();
 		shape.begin(ShapeType.Filled);
@@ -97,8 +121,10 @@ public class GameView {
 		if (spriteBalloon.getBoundingRectangle().contains(x, y)) {
 			meters += step;
 			clickCount++;
-			step = 10 + (int) Math.hypot(meters / 25, meters / 500);
+			step = 10 + (int) Math.hypot(meters / 25, 100);
 			spriteBg.setPosition(0, -meters);
+			for (int i = 0; i < cloud.length; i++)
+				cloud[i].translateY(-step);
 		}
 	}
 }
