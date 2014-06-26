@@ -38,7 +38,7 @@ public class AndroidRun implements ApplicationListener {
 	public void render() {
 		background.render();
 		if (flagView == "Menu" || !timerAnimation.timer()) menu.render();
-		if (flagView == "Game" && timerAnimation.timer()) {game.render(); }
+		if (flagView == "Game" && timerAnimation.timer()) {game.render();}
 		if (flagView == "About" && timerAnimation.timer()) {about.render(); }
 		if (flagView == "Scores" && timerAnimation.timer()) {score.render(); }
 	}
