@@ -7,7 +7,7 @@ import com.badlogic.gdx.InputProcessor;
 public class GameInputListener implements InputProcessor {
 	public final float	W	= Gdx.graphics.getWidth();
 	public final float	H	= Gdx.graphics.getHeight();
-	private LogicMenu logicMenu;
+	private LogicMenu	logicMenu;
 	private AndroidRun	androidRun;
 
 	public GameInputListener(AndroidRun androidRun) {
@@ -29,8 +29,7 @@ public class GameInputListener implements InputProcessor {
 			} else if (AndroidRun.flagView.equals("About")) {
 				AndroidRun.flagView = "Menu";
 				Menu.flagScrollButton = -1;
-			} else if (AndroidRun.flagView.equals("Menu"))
-				System.exit(0);
+			} else if (AndroidRun.flagView.equals("Menu")) System.exit(0);
 		}
 		return false;
 	}

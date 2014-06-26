@@ -8,7 +8,7 @@ public class AndroidRun implements ApplicationListener {
 	public static String	flagView;
 	private GameView		game;
 	public LevelsView		levels;
-	private AboutView       about;
+	private AboutView		about;
 	private Background		background;
 	private TimerAnimation	timerAnimation;
 
