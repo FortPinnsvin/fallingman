@@ -5,8 +5,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Disposable;
 
-public class Background {
+public class Background implements Disposable {
 	public final float	WIDTH	= Gdx.graphics.getWidth();
 	public final float	HEIGHT	= Gdx.graphics.getHeight();
 	private Texture		bg;
@@ -27,5 +28,12 @@ public class Background {
 		batch.begin();
 		spriteBg.draw(batch);
 		batch.end();
+	}
+
+	@Override
+	public void dispose() {
+		bg.dispose();
+		batch.dispose();
+		spriteBg = null;
 	}
 }
