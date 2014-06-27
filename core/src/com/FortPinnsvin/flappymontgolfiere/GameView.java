@@ -2,6 +2,8 @@ package com.FortPinnsvin.flappymontgolfiere;
 
 import java.util.Arrays;
 import java.util.Random;
+import android.content.Context;
+import android.content.Intent;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -35,6 +37,9 @@ public class GameView implements Disposable {
 	public boolean		flagFinish;
 	public long			time;
 	public boolean		isStart;
+	public Texture		button;
+	public Sprite		spriteButton;
+	public Context		context;
 
 	public void create() {
 		batch = new SpriteBatch();
@@ -86,6 +91,12 @@ public class GameView implements Disposable {
 			}
 			cloud[i].setPosition(-W / 2 + W * rand.nextFloat(), H + 5000 * rand.nextFloat());
 		}
+		button = new Texture("button.png");
+		spriteButton = new Sprite(button);
+		float buttonWidth = (W - 100);
+		float buttonHeight = ((H / 2) - 50) / 4;
+		spriteButton.setPosition(W / 2 - buttonWidth / 2, H - 4 * buttonHeight);
+		spriteButton.setSize(buttonWidth, buttonHeight);
 	}
 
 	public void render() {
@@ -166,10 +177,23 @@ public class GameView implements Disposable {
 					cloud[i].translateY(-step);
 			}
 		}
+		if (flagFinish && spriteButton.getBoundingRectangle().contains(x, y)) {
+			Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+			intent.setType("text/plain");
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+			intent.putExtra(Intent.EXTRA_SUBJECT, "Flappy Montgolfiere Score");
+			intent.putExtra(Intent.EXTRA_TEXT, "Wow! My new score in awesome #FlappyMontgolfiere is " + clickCount + " clicks.");
+			context.startActivity(Intent.createChooser(intent, "How do you want to share you scores?"));
+		}
 	}
 
 	public void renderFinishResult() {
+		float buttonWidth = (W - 100);
+		float buttonHeight = ((H / 2) - 50) / 4;
 		font.drawWrapped(batch, "Cooooooool\nYou make " + clickCount + " clicks", 0, H / 2, W, HAlignment.CENTER);
+		spriteButton.draw(batch);
+		font.drawWrapped(batch, "Share scores", W / 2 - buttonWidth / 2, H - 3.5f * buttonHeight + font.getLineHeight() / 2, buttonWidth,
+				HAlignment.CENTER);
 	}
 
 	public void dispose() {
@@ -180,5 +204,10 @@ public class GameView implements Disposable {
 		shkala.dispose();
 		sattelite.dispose();
 		finish.dispose();
+		button.dispose();
+	}
+
+	public void setContext(Context context) {
+		this.context = context;
 	}
 }

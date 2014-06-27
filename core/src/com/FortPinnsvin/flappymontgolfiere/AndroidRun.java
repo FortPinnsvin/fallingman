@@ -1,5 +1,6 @@
 package com.FortPinnsvin.flappymontgolfiere;
 
+import android.content.Context;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 
@@ -11,6 +12,13 @@ public class AndroidRun implements ApplicationListener {
 	private Background		background;
 	private TimerAnimation	timerAnimation;
 	public static ScoreView	score;
+	public Context			context;
+
+	public AndroidRun() {}
+
+	public AndroidRun(Context context) {
+		this.context = context;
+	}
 
 	@Override
 	public void create() {
@@ -21,6 +29,7 @@ public class AndroidRun implements ApplicationListener {
 		menu.create();
 		// GameView
 		game = new GameView();
+		game.setContext(context);
 		// BackgroundView
 		background = new Background();
 		background.create();

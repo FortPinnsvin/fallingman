@@ -1,5 +1,6 @@
 package com.FortPinnsvin.flappymontgolfiere;
 
+import android.content.Context;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -30,6 +31,12 @@ public class Menu extends AndroidRun {
 	private final String[]	BTN_LABELS	= {"Play", "Scores", "About", "Exit"};
 	public String			app_name	= "Flappy Montgolfiere";
 	private float			timer		= 0.0f;
+
+	public Menu() {}
+
+	public Menu(Context context) {
+		super(context);
+	}
 
 	@Override
 	public void create() {
