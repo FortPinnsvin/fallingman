@@ -2,6 +2,7 @@ package com.FortPinnsvin.flappymontgolfiere;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 
 public class AndroidRun implements ApplicationListener {
 	public static Menu		menu;
@@ -11,9 +12,11 @@ public class AndroidRun implements ApplicationListener {
 	private Background		background;
 	private TimerAnimation	timerAnimation;
 	public static ScoreView	score;
+	private Music 			music;
 
 	@Override
 	public void create() {
+		music = Gdx.audio.newMusic(Gdx.files.internal("sound.mp3"));
 		flagView = "Menu";
 		timerAnimation = new TimerAnimation();
 		// MenuView
@@ -32,6 +35,8 @@ public class AndroidRun implements ApplicationListener {
 		score.create();
 		Gdx.input.setInputProcessor(new GameInputListener(this));
 		Gdx.input.setCatchBackKey(true);
+		music.setLooping(true);
+		music.play();
 	}
 
 	@Override
@@ -59,5 +64,6 @@ public class AndroidRun implements ApplicationListener {
 		about.dispose();
 		score.dispose();
 		background.dispose();
+		music.dispose();
 	}
 }
