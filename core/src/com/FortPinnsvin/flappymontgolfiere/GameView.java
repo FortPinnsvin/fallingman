@@ -61,7 +61,7 @@ public class GameView implements Disposable {
 		spriteSattelite.setPosition(spriteSattelite.getX() - (W / 3), spriteBalloon.getY() + (H / 3));
 		spriteFinish = new Sprite(finish);
 		spriteFinish.setSize(W, H / 5);
-		spriteFinish.setPosition(0, HEIGHT_BALLOON - H / 5);
+		spriteFinish.setPosition(0, HEIGHT_BALLOON + H / 5);
 		flagFinish = false;
 		clickCount = 0;
 		meters = 0;
