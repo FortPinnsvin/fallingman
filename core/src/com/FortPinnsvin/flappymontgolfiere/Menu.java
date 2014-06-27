@@ -97,6 +97,7 @@ public class Menu extends AndroidRun {
 			float dX = (spriteButton[i].getWidth() - bounds.width) / 2;
 			float dY = (spriteButton[i].getHeight() - bounds.height) / 2;
 			font.draw(batch, BTN_LABELS[BTN_LABELS.length - i - 1], x + dX, y - dY);
+			bounds = null;
 		}
 		font.setScale(1.2f);
 		font.setColor(0, 0, 1, 1);
@@ -118,14 +119,19 @@ public class Menu extends AndroidRun {
 			spriteCloude[i].setSize(cloudeW[i], cloudeH[i]);
 		}
 	}
-	
-	public void dispose(){
+
+	public void dispose() {
 		batch.dispose();
 		button.dispose();
-		balloon.dispose();		
+		balloon.dispose();
 		font.dispose();
-		for(int i = 0; i<cloude.length; i++ )cloude[i].dispose();
-		for(int i = 0; i<spriteCloude.length; i++ )spriteCloude[i] = null;
-		for(int i = 0; i<spriteButton.length; i++ )spriteButton[i] = null;
+		for (int i = 0; i < cloude.length; i++)
+			cloude[i].dispose();
+		for (int i = 0; i < spriteCloude.length; i++)
+			spriteCloude[i] = null;
+		for (int i = 0; i < spriteButton.length; i++)
+			spriteButton[i] = null;
+		spriteBalloon = null;
+		logicMenu.dispose();
 	}
 }

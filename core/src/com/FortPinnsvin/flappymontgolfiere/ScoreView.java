@@ -26,8 +26,9 @@ public class ScoreView {
 			font.drawWrapped(batch, (i + 1) + "      " + arr[i], 0, H - H / 5 - (font.getSpaceWidth() + font.getLineHeight()) * i, W,
 					HAlignment.CENTER);
 		batch.end();
+		arr = null;
 	}
-	
+
 	public void dispose() {
 		batch.dispose();
 		font.dispose();

@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.utils.Disposable;
 
-public class GameView implements Disposable{
+public class GameView implements Disposable {
 	public final int	HEIGHT_BALLOON	= 10000;
 	public float		W				= Gdx.graphics.getWidth();
 	public float		H				= Gdx.graphics.getHeight();
@@ -180,16 +180,5 @@ public class GameView implements Disposable{
 		shkala.dispose();
 		sattelite.dispose();
 		finish.dispose();
-		for (int i = 0; i < cloud.length; i++)
-			cloud[i] = null;
-		Gdx.gl.glFlush();
-		balloon = null;
-		bg = null;
-		batch = null;
-		font = null;
-		shkala = null;
-		sattelite = null;
-		finish = null;
-		System.gc();
 	}
 }
