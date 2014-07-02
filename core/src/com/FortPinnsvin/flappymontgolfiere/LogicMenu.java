@@ -35,9 +35,11 @@ public class LogicMenu implements Disposable {
 				}
 				if (i == 2) {
 					AndroidRun.flagView = "Scores";
+					AndroidRun.score.create();
 				}
 				if (i == 1) {
 					AndroidRun.flagView = "About";
+					AndroidRun.about.create();
 				}
 				if (i == 0) System.exit(0);
 				Menu.flagScrollButton = 1;

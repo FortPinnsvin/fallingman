@@ -33,9 +33,6 @@ public class GameInputListener implements InputProcessor {
 				Menu.flagScrollButton = -1;
 			} else if (AndroidRun.flagView.equals("Menu")) {
 				AndroidRun.menu.dispose();
-				AndroidRun.about.dispose();
-				AndroidRun.game.dispose();
-				AndroidRun.score.dispose();
 				System.exit(0);
 			} else if (AndroidRun.flagView.equals("Game")) {
 				AndroidRun.flagView = "Menu";
